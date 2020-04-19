@@ -3,7 +3,9 @@ import * as React from 'react'
 
 import TabBarIcon from '../components/atoms/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
-import LinksScreen from '../screens/LinksScreen'
+import Favorite from '../screens/Favorite'
+import Profile from '../screens/Profile'
+import MyLibrary from '../screens/MyLibrary'
 
 const BottomTab = createBottomTabNavigator()
 const INITIAL_ROUTE_NAME = 'Home'
@@ -20,18 +22,28 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Get Started',
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-code-working" />
-          ),
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-home" />,
         }}
       />
       <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
+        name="MyLibrary"
+        component={MyLibrary}
         options={{
-          title: 'Resources',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Favorite"
+        component={Favorite}
+        options={{
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-heart" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />,
         }}
       />
     </BottomTab.Navigator>
@@ -43,8 +55,12 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Home':
-      return 'How to get started'
-    case 'Links':
-      return 'Links to learn more'
+      return 'Trang chủ'
+    case 'MyLibrary':
+      return 'Sách đã mượn'
+    case 'Favorite':
+      return 'Sách đã lưu'
+    case 'Profile':
+      return 'Thông tin cá nhân'
   }
 }
