@@ -2,10 +2,10 @@ import * as React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
-export default function LinksScreen() {
+export default function MyLibrary() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <Text>Link Screen</Text>
+      <Text>Sách đã mượn</Text>
     </ScrollView>
   )
 }
