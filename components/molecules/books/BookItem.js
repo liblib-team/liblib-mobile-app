@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import { Card } from 'native-base'
-import Colors from '../../constants/Colors'
-import Layout from '../../constants/Layout'
+import Colors from '../../../constants/Colors'
+import Layout from '../../../constants/Layout'
 
 export default BookItem = (props) => {
   const { img, title, author } = props

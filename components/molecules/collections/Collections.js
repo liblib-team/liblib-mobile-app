@@ -2,8 +2,8 @@ import * as React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import { List, ListItem, Card } from 'native-base'
 
-import Colors from '../../constants/Colors'
-import Layout from '../../constants/Layout'
+import Colors from '../../../constants/Colors'
+import Layout from '../../../constants/Layout'
 
 const Subject = [
   { id: 1, subject: 'Business' },

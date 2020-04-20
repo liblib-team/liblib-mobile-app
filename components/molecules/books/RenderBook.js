@@ -1,8 +1,8 @@
 import React from 'react'
 import { ParallaxImage } from 'react-native-snap-carousel'
 import { View, Text, StyleSheet } from 'react-native'
-import Colors from '../../constants/Colors'
-import Layout from '../../constants/Layout'
+import Layout from '../../../constants/Layout'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 export default RenderBook = ({ item, index }, parallaxProps) => {
   return (

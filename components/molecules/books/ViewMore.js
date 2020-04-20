@@ -2,7 +2,7 @@ import * as React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Icon } from 'native-base'
 
-import Colors from '../../constants/Colors'
+import Colors from '../../../constants/Colors'
 
 export default function ViewMore(props) {
   const { filterName } = props

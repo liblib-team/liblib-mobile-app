@@ -2,7 +2,7 @@ import * as React from 'react'
 import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
 
 import BookItem from './BookItem'
-import Colors from '../../constants/Colors'
+import Colors from '../../../constants/Colors'
 
 export default ListBook = () => {
   const books = [

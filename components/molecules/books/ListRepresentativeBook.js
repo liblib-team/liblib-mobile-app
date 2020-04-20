@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel'
 import { View, Text, StyleSheet } from 'react-native'
-import Layout from '../../constants/Layout'
+
 import RenderBook from './RenderBook'
+import Layout from '../../../constants/Layout'
 
 const ListBook = [
   {
