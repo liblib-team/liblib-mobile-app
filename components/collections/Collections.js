@@ -11,7 +11,12 @@ const Subject = [
   { id: 3, subject: 'Infomation' },
   { id: 4, subject: 'English' },
 ]
-const background = [Colors.pink, Colors.secondary, Colors.blue, Colors.green]
+const background = [
+  Colors.pink,
+  Colors.blue,
+  Colors.secondary_dark,
+  Colors.warningBackground,
+]
 export default Collection = () => {
   return (
     <List
@@ -19,7 +24,10 @@ export default Collection = () => {
       dataArray={Subject}
       renderRow={(item) => {
         return (
-          <ListItem noBorder style={styles.card}>
+          <ListItem
+            noBorder
+            style={[styles.card, { backgroundColor: background[item.id - 1] }]}
+          >
             <Text adjustsFontSizeToFit={true} numberOfLines={2} style={styles.subject}>
               {item.subject}
             </Text>
@@ -31,19 +39,15 @@ export default Collection = () => {
 }
 const styles = StyleSheet.create({
   card: {
-    marginTop: 10,
-    marginBottom: 10,
     borderRadius: 5,
-    borderColor: Colors.secondary,
-    backgroundColor: Colors.tintColor,
-    flex: 1,
     height: 80,
     width: Layout.window.width / 2,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   subject: {
     fontSize: 18,
     color: Colors.white,
-    textAlign: 'center',
-    textAlignVertical: 'center'
   },
 })

@@ -13,6 +13,7 @@ export default HomeScreen = () => {
       <ListRepresentativeBook />
       <ViewMore filterName="Sách xem nhiều" />
       <ListBook />
+      <ViewMore filterName="Bộ sưu tập" />
       <Collections />
       <ViewMore filterName="Sách Hot" />
       <ListBook />
