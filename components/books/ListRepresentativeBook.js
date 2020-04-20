@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel'
 import { View, Text, StyleSheet } from 'react-native'
-import Colors from '../../constants/Colors'
 import Layout from '../../constants/Layout'
 import RenderBook from './RenderBook'
 
@@ -9,7 +8,8 @@ const ListBook = [
   {
     title: 'VNU',
     subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-    illustration: 'https://media.ex-cdn.com/EXP/media.nongnghiep.vn/files/f1/2018/12/12/15-01-46_thu_vien_cu_dh_kinh_te_quoc_dn.jpg',
+    illustration:
+      'https://media.ex-cdn.com/EXP/media.nongnghiep.vn/files/f1/2018/12/12/15-01-46_thu_vien_cu_dh_kinh_te_quoc_dn.jpg',
   },
   {
     title: 'VNU',
