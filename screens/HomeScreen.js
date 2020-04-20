@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { StyleSheet, Text, ScrollView } from 'react-native'
 
-import ListBook from '../components/molecules/books/ListBook'
+import ListBook from '../components/oganism/listBook/ListBook'
 import ViewMore from '../components/molecules/books/ViewMore'
 import Colors from '../constants/Colors'
-import ListRepresentativeBook from '../components/molecules/books/ListRepresentativeBook'
+import ListRepresentativeBook from '../components/oganism/listBook/ListRepresentativeBook'
 import Collections from '../components/molecules/collections/Collections'
 
 export default HomeScreen = () => {
