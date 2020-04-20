@@ -15,4 +15,7 @@ export default {
   background: '#fafafa',
   secondary: '#cccc',
   secondary_dark: '#808080',
+  pink: '#ff8080',
+  bllu: '#80b3ff',
+  green: '#80ff80',
 }
