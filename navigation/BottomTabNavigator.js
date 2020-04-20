@@ -19,28 +19,28 @@ export default function BottomTabNavigator({ navigation, route }) {
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen
-        name="Home"
+        name="Trang chủ"
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-home" />,
         }}
       />
       <BottomTab.Screen
-        name="MyLibrary"
+        name="Tủ sách"
         component={MyLibrary}
         options={{
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
         }}
       />
       <BottomTab.Screen
-        name="Favorite"
+        name="Yêu thích"
         component={Favorite}
         options={{
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-heart" />,
         }}
       />
       <BottomTab.Screen
-        name="Profile"
+        name="Cá nhân"
         component={Profile}
         options={{
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />,
