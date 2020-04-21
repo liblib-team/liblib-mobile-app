@@ -17,7 +17,7 @@ export default HomeScreen = ({ navigation: { navigate } }) => {
       <ListRepresentativeBook />
       <ViewMore filterName="Sách xem nhiều" onGoToViewAll={onGoToViewAll} />
       <ListBook />
-      <ViewMore filterName="Bộ sưu tập" />
+      <Text style={styles.filter}>Bộ sưu tập</Text>
       <Collections />
       <ViewMore filterName="Sách Hot" onGoToViewAll={onGoToViewAll} />
       <ListBook />
@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginHorizontal: 10,
     fontWeight: 'bold',
-    height: 40,
+    height: 30,
     marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
