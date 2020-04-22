@@ -7,10 +7,11 @@ import Colors from '../constants/Colors'
 import BookInfo from '../components/molecules/bookDetails/BookInfo'
 import ViewMore from '../components/molecules/books/ViewMore'
 
-export default BookDetail = () => {
+export default BookDetails = ({ route }) => {
+  const title = route.params.title
   return (
     <ScrollView style={styles.container}>
-      <BookInfo />
+      <BookInfo title={title} author="alexander" />
       <ViewMore filterName="Bình luận nổi bật" />
       <Review rating="3" comment="Nice book" />
       <Review rating="5" comment="Very good" />

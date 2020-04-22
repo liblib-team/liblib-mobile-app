@@ -6,28 +6,23 @@ import { Rating } from 'react-native-ratings'
 import Layout from '../../../constants/Layout'
 import Colors from '../../../constants/Colors'
 
-export default BookInfo = () => {
+export default BookInfo = (props) => {
+  const { id, title, img, author } = props
   const [isShowMoreInfo, setisShowMoreInfo] = useState(false)
   const onClickInfo = () => setisShowMoreInfo((previousState) => !previousState)
   return (
     <View>
       <View style={styles.container}>
         <View style={[styles.inLine, { justifyContent: 'center', marginTop: 5 }]}>
-          <Image
-            style={styles.image}
-            source={{
-              uri:
-                'https://bizweb.dktcdn.net/100/197/269/products/thuat-doc-tam.png?v=1568685712587',
-            }}
-          />
+          <CustomImage img="https://bizweb.dktcdn.net/100/197/269/products/phan-tich-chung-khoan-outline-26.jpg?v=1521167573353" />
           <View style={styles.inCol}>
             <View style={styles.customTitle}>
               <Text style={styles.title} numberOfLines={5}>
-                Thuật đọc tâm
+                {title}
               </Text>
             </View>
 
-            <Text style={styles.author}>Alecxander</Text>
+            <Text style={styles.author}>{author}</Text>
             <View style={[styles.inLine, { marginLeft: 5 }]}>
               <Rating startingValue={2.5} imageSize={15} readonly />
               <Text style={styles.author}>4.7</Text>
