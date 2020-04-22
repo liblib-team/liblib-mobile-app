@@ -15,9 +15,8 @@ export default function BottomTabNavigator({ navigation, route }) {
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   navigation.setOptions({ headerTitle: getHeaderTitle(route) })
-
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator>
       <BottomTab.Screen
         name="Trang chủ"
         component={HomeScreen}
@@ -54,13 +53,13 @@ function getHeaderTitle(route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME
 
   switch (routeName) {
-    case 'Home':
+    case 'Trang chủ':
       return 'Trang chủ'
-    case 'MyLibrary':
+    case 'Tủ sách':
       return 'Sách đã mượn'
-    case 'Favorite':
+    case 'Yêu thích':
       return 'Sách đã lưu'
-    case 'Profile':
+    case 'Cá nhân':
       return 'Thông tin cá nhân'
   }
 }
