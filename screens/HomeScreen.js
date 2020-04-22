@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { StyleSheet, Text, ScrollView, Button } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import ListBook from '../components/oganism/listBook/ListBook'
 import ViewMore from '../components/molecules/books/ViewMore'
@@ -8,14 +9,18 @@ import ListRepresentativeBook from '../components/oganism/listBook/ListRepresent
 import Collections from '../components/molecules/collections/Collections'
 
 export default HomeScreen = () => {
+  const navigator = useNavigation()
+  const onGoToViewAll = (filterName) => {
+    navigator.navigate('ViewAllBooks', { title: filterName })
+  }
   return (
     <ScrollView style={styles.container}>
       <ListRepresentativeBook />
-      <ViewMore filterName="Sách xem nhiều" />
+      <ViewMore filterName="Sách xem nhiều" onGoToViewAll={onGoToViewAll} />
       <ListBook />
       <Text style={styles.filter}>Bộ sưu tập</Text>
       <Collections />
-      <ViewMore filterName="Sách Hot" />
+      <ViewMore filterName="Sách Hot" onGoToViewAll={onGoToViewAll} />
       <ListBook />
     </ScrollView>
   )
