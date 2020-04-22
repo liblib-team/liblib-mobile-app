@@ -1,17 +1,16 @@
 import * as React from 'react'
 import { NavigationContainer, StackActions } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack'
 
-import ViewAllBooks from '../components/oganism/listBook/ViewAllBooks'
 import BottomTabNavigator from './BottomTabNavigator'
+import ViewAllBooks from '../components/oganism/listBook/ViewAllBooks'
+import BookDetails from '../screens/BookDetails'
 
 const Stack = createStackNavigator()
 
-const optionsHeader = ({ route }) => {
-  {
-    title: route.params.title
-  }
-}
+const optionsHeader = ({ route }) => ({
+  title: route.params.title,
+})
 export default Routes = () => {
   return (
     <Stack.Navigator initialRouteName="Trang chủ">
@@ -21,6 +20,7 @@ export default Routes = () => {
         component={ViewAllBooks}
         options={optionsHeader}
       />
+      <Stack.Screen name="BookDetails" component={BookDetails} options={optionsHeader} />
     </Stack.Navigator>
   )
 }

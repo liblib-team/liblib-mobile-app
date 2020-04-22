@@ -3,8 +3,7 @@ import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
 
 import BookItem from '../../molecules/books/BookItem'
 import Colors from '../../../constants/Colors'
-
-export default ListBook = () => {
+export default ListBook = (props) => {
   const books = [
     {
       id: '1',
@@ -56,7 +55,12 @@ export default ListBook = () => {
           horizontal
           data={books}
           renderItem={({ item }) => (
-            <BookItem img={item.uri} title={item.title} author={item.author} />
+            <BookItem
+              id={item.id}
+              img={item.uri}
+              title={item.title}
+              author={item.author}
+            />
           )}
           keyExtractor={(item) => item.id}
         />

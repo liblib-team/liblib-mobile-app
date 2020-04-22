@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { StyleSheet, Text } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { StyleSheet, Text, View } from 'react-native'
 
 export default function MyLibrary() {
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <View>
       <Text>Sách đã mượn</Text>
-    </ScrollView>
+    </View>
   )
 }
 

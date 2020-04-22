@@ -1,22 +1,28 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { Card } from 'native-base'
+
+import CustomImage from '../../atoms/CustomImage'
 import Colors from '../../../constants/Colors'
 import Layout from '../../../constants/Layout'
+import { useNavigation } from '@react-navigation/native'
 
 export default BookItem = (props) => {
-  const { img, title, author } = props
+  const { id, img, title, author } = props
+  const navigator = useNavigation()
+
+  const onGoToBookDetails = (title) => {
+    navigator.navigate('BookDetails', { title: title })
+  }
+
   return (
-    <Card style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: img,
-        }}
-      />
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.author}>{author}</Text>
-    </Card>
+    <TouchableOpacity onPress={() => onGoToBookDetails(title)}>
+      <Card style={styles.container}>
+        <CustomImage img={img} />
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.author}>{author}</Text>
+      </Card>
+    </TouchableOpacity>
   )
 }
 
@@ -25,12 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     marginLeft: 10,
-  },
-  image: {
-    height: Layout.window.height / 3.5,
-    width: Layout.window.width / 2.5,
-    margin: 5,
-    borderRadius: 5,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 16,
