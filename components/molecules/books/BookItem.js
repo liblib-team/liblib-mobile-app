@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     marginLeft: 10,
+    justifyContent: 'center',
   },
   image: {
     height: Layout.window.height / 3.5,
