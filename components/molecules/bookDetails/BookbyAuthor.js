@@ -12,7 +12,7 @@ export default BookbyAuthor = (props) => {
     <View style={styles.container}>
       <Card style={styles.inLine}>
         <View style={styles.img}>
-          <CustomImage img={img} />
+          <CustomImage img={img} style={styles.imgCustom} />
         </View>
 
         <View style={styles.inCol}>
@@ -48,11 +48,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 200,
     marginLeft: 10,
+    borderRadius: 5,
   },
   inCol: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    marginLeft: Layout.window.width * 0.4 + 20,
+    marginLeft: Layout.window.width * 0.4 + 25,
     marginRight: 10,
   },
   customTitle: {
@@ -73,7 +74,14 @@ const styles = StyleSheet.create({
   },
   img: {
     position: 'absolute',
+    borderRadius: 10,
     bottom: 10,
-    left: 10,
+    flex: 1,
+    marginLeft: 10,
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: Colors.secondary,
+    shadowOffset: { width: -10, height: -10 },
+    elevation: 5,
   },
 })
