@@ -33,12 +33,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     justifyContent: 'center',
   },
-  image: {
-    height: Layout.window.height / 3.5,
-    width: Layout.window.width / 2.5,
-    margin: 5,
-    borderRadius: 5,
-  },
   title: {
     fontSize: 16,
     marginHorizontal: 5,

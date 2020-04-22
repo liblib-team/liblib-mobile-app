@@ -80,12 +80,6 @@ const styles = StyleSheet.create({
   inLine: {
     flexDirection: 'row',
   },
-  image: {
-    height: Layout.window.height / 3.5,
-    width: Layout.window.width / 2.5,
-    margin: 5,
-    borderRadius: 5,
-  },
   inCol: {
     flexDirection: 'column',
     justifyContent: 'center',

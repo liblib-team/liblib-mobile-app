@@ -9,7 +9,7 @@ export default CustomImage = (props) => {
   return (
     <AutoHeightImage
       style={styles.image}
-      width={Layout.window.width / 2.5}
+      width={Layout.window.width * 0.4}
       source={{
         uri: img,
       }}
