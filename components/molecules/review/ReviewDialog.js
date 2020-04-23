@@ -6,7 +6,7 @@ import Colors from '../../../constants/Colors'
 import Layout from '../../../constants/Layout'
 
 export default ReviewDialog = (props) => {
-  const { onCancel, onRate, visible } = props
+  const { onCancel, onRate, visibleDiaglog } = props
   const reactNativeModalProps = {
     onBackdropPress: onCancel,
   }
@@ -16,7 +16,7 @@ export default ReviewDialog = (props) => {
   return (
     <View>
       <Dialog.Container
-        visible={visible}
+        visible={visibleDiaglog}
         {...reactNativeModalProps}
         contentStyle={styles.container}
         headerStyle={styles.headerStyle}

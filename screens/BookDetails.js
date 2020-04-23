@@ -10,17 +10,17 @@ import ReviewDialog from '../components/molecules/review/ReviewDialog'
 
 export default BookDetails = ({ route }) => {
   const title = route.params.title
-  const [visible, setvisible] = useState(false)
+  const [visibleDiaglog, setVisibleDialog] = useState(false)
   const onCancel = () => {
-    setvisible(false)
+    setVisibleDialog(false)
   }
   const showDialog = () => {
-    setvisible(true)
+    setVisibleDialog(true)
   }
   return (
     <ScrollView style={styles.container}>
       <BookInfo title={title} author="alexander" />
-      <ViewMore filterName="Bình luận nổi bật" />
+      <Text style={styles.filter}>Bình luận nổi bật</Text>
       <Review rating="3" comment="Nice book" />
       <Review rating="5" comment="Very good" />
       <Review rating="2" comment="Not bad" />
@@ -35,7 +35,7 @@ export default BookDetails = ({ route }) => {
         </Card>
       </TouchableWithoutFeedback>
 
-      <ReviewDialog onCancel={onCancel} visible={visible} />
+      <ReviewDialog onCancel={onCancel} visibleDiaglog={visibleDiaglog} />
     </ScrollView>
   )
 }
@@ -53,5 +53,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
     color: Colors.tintColor,
+  },
+  filter: {
+    fontSize: 16,
+    marginHorizontal: 10,
+    fontWeight: 'bold',
+    height: 30,
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
