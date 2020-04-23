@@ -6,6 +6,8 @@ import Review from '../components/molecules/review/Review'
 import Colors from '../constants/Colors'
 import BookInfo from '../components/molecules/bookDetails/BookInfo'
 import ViewMore from '../components/molecules/books/ViewMore'
+import ListBookbyAuthor from '../components/oganism/listBook/ListBookbyAuthor'
+import ListBook from '../components/oganism/listBook/ListBook'
 import ReviewDialog from '../components/molecules/review/ReviewDialog'
 
 export default BookDetails = ({ route }) => {
@@ -34,8 +36,11 @@ export default BookDetails = ({ route }) => {
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>
-
       <ReviewDialog onCancel={onCancel} visibleDiaglog={visibleDiaglog} />
+      <Text style={styles.filter}>Sách cùng tác giả</Text>
+      <ListBookbyAuthor />
+      <Text style={styles.filter}>Có thể bạn cũng thích</Text>
+      <ListBook />
     </ScrollView>
   )
 }
