@@ -1,16 +1,12 @@
 import * as React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Icon } from 'native-base'
-import { useNavigation } from '@react-navigation/native'
+
 
 import Colors from '../../../constants/Colors'
 
 export default ViewMore = (props) => {
-  const { filterName } = props
-  const navigator = useNavigation()
-  const onGoToViewAll = (filterName) => {
-    navigator.navigate('ViewAllBooks', { title: filterName })
-  }
+  const { filterName, onGoToViewAll } = props
   return (
     <TouchableOpacity onPress={() => onGoToViewAll(filterName)}>
       <View style={styles.inLine}>
