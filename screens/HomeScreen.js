@@ -1,18 +1,23 @@
 import React from 'react'
-import { StyleSheet, Text, ScrollView, View } from 'react-native'
+import { StyleSheet, Text, ScrollView, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { connect, useDispatch } from 'react-redux'
 
 import ListBook from '../components/oganism/listBook/ListBook'
 import ViewMore from '../components/molecules/books/ViewMore'
 import Colors from '../constants/Colors'
 import ListRepresentativeBook from '../components/oganism/listBook/ListRepresentativeBook'
 import Collections from '../components/molecules/collections/Collections'
-import ActivityIndicator from '../components/atoms/ActivityIndicator'
+import { queryLogin } from '../actions/login'
 
-export default HomeScreen = () => {
+const HomeScreen = (props) => {
   const navigator = useNavigation()
   const onGoToViewAll = (filterName) => {
     navigator.navigate('ViewAllBooks', { title: filterName })
+  }
+
+  const onSubmit = () => {
+    props.queryLogin({})
   }
 
   return (
@@ -24,6 +29,7 @@ export default HomeScreen = () => {
       <Collections />
       <ViewMore filterName="Sách Hot" onGoToViewAll={onGoToViewAll} />
       <ListBook />
+      <Button onPress={onSubmit} title="Click"></Button>
     </ScrollView>
   )
 }
@@ -46,3 +52,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
+
+const mapDispatchToProps = {
+  queryLogin,
+}
+
+export default connect(null, mapDispatchToProps)(HomeScreen)
