@@ -14,8 +14,11 @@ export default {
   white: '#ffff',
   background: '#fafafa',
   secondary: '#cccc',
+  secondary_light: '#708090',
   secondary_dark: '#808080',
   pink: '#ff8080',
   blue: '#80b3ff',
   green: '#80ff80',
+  black: '#000',
+  placeholderText: '#708090',
 }
