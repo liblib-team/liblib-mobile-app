@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { Icon, CheckBox, ListItem } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
 import Colors from '../constants/Colors'
+import { TouchableHighlight } from 'react-native-gesture-handler'
 
 const SignIn = () => {
+  const navigator = useNavigation()
   const [rememberMe, setrememberMe] = useState(true)
 
   const handleButton = () => setrememberMe((previousState) => !previousState)
+
+  const SignUp = () => {
+    navigator.navigate('SignUp')
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.signup}>Đăng nhập</Text>
@@ -33,7 +40,10 @@ const SignIn = () => {
       <TouchableOpacity style={styles.loginBtn}>
         <Text style={styles.loginText}>Sign up</Text>
       </TouchableOpacity>
-      <Text style={styles.text1}>Đăng ký tài khoản mới.</Text>
+      <TouchableHighlight onPress={SignUp}>
+        <Text style={styles.text1}>Đăng ký tài khoản mới.</Text>
+      </TouchableHighlight>
+
       <Text style={styles.text2}>Quên mật khẩu?</Text>
     </View>
   )

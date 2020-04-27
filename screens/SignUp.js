@@ -15,10 +15,10 @@ import {
   Input,
   Item,
 } from 'native-base'
+
 const SignUp = () => {
   return (
     <View>
-      <Icon style={styles.iconButton} name="arrow-back" />
       <Text style={styles.signup}>Đăng ký tài khoản</Text>
       <View style={styles.inputView}>
         <TextInput
