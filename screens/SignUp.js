@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   inputView: {
     flexDirection: 'row',
     width: '80%',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     height: 25,
     margin: 15,
     alignSelf: 'center',

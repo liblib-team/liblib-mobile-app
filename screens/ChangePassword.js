@@ -1,24 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-import {
-  Container,
-  Header,
-  Title,
-  Content,
-  Footer,
-  FooterTab,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-  Input,
-  Item,
-} from 'native-base'
+import { Icon } from 'native-base'
+
+import Colors from '../constants/Colors'
 const ChangePassword = () => {
   return (
-    <View>
-      <Icon style={styles.iconButton} name="arrow-back" />
+    <View style={styles.container}>
       <Text style={styles.signup}>Đổi mật khẩu</Text>
       <View style={styles.inputView}>
         <TextInput
@@ -51,6 +38,10 @@ const ChangePassword = () => {
   )
 }
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.white,
+    flex: 1,
+  },
   iconButton: {
     marginTop: 40,
     marginStart: 15,
@@ -58,7 +49,7 @@ const styles = StyleSheet.create({
   inputView: {
     flexDirection: 'row',
     width: '80%',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     height: 25,
     margin: 15,
     alignSelf: 'center',

@@ -15,6 +15,9 @@ const SignIn = () => {
   const SignUp = () => {
     navigator.navigate('SignUp')
   }
+  const ChangePassword = () => {
+    navigator.navigate('ChangePassword')
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.signup}>Đăng nhập</Text>
@@ -43,7 +46,9 @@ const SignIn = () => {
       <TouchableHighlight onPress={SignUp}>
         <Text style={styles.text1}>Đăng ký tài khoản mới.</Text>
       </TouchableHighlight>
-      <Text style={styles.text2}>Quên mật khẩu?</Text>
+      <TouchableHighlight onPress={ChangePassword}>
+        <Text style={styles.text2}>Quên mật khẩu?</Text>
+      </TouchableHighlight>
     </View>
   )
 }
