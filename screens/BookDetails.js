@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ScrollView, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { Body, Card, CardItem } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
 import Review from '../components/molecules/review/Review'
 import Colors from '../constants/Colors'
@@ -12,12 +13,16 @@ import ReviewDialog from '../components/molecules/review/ReviewDialog'
 
 export default BookDetails = ({ route }) => {
   const title = route.params.title
+  const navigator = useNavigation()
   const [visibleDiaglog, setVisibleDialog] = useState(false)
   const onCancel = () => {
     setVisibleDialog(false)
   }
   const showDialog = () => {
     setVisibleDialog(true)
+  }
+  const onGoToViewAll = (filterName) => {
+    navigator.navigate('Author', { title: filterName })
   }
   return (
     <ScrollView style={styles.container}>
@@ -37,7 +42,7 @@ export default BookDetails = ({ route }) => {
         </Card>
       </TouchableWithoutFeedback>
       <ReviewDialog onCancel={onCancel} visibleDiaglog={visibleDiaglog} />
-      <Text style={styles.filter}>Sách cùng tác giả</Text>
+      <ViewMore filterName="Sách cùng tác giả" onGoToViewAll={onGoToViewAll} />
       <ListBookbyAuthor />
       <Text style={styles.filter}>Có thể bạn cũng thích</Text>
       <ListBook />

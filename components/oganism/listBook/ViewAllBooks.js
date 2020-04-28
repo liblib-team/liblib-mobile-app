@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
 import BookItem from '../../molecules/books/BookItem'
 import Colors from '../../../constants/Colors'
 
-export default ViewAllBooks = ({ navigation, route }) => {
+export default ViewAllBooks = () => {
   const books = [
     {
       id: '1',
@@ -49,14 +49,6 @@ export default ViewAllBooks = ({ navigation, route }) => {
       author: 'Alexander',
     },
   ]
-
-  const [value, onChangeText] = React.useState(route.params.title)
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: value === '' ? 'No title' : value,
-    })
-  }, [navigation, value])
 
   return (
     <View>
