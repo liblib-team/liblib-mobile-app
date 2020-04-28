@@ -38,12 +38,11 @@ const SignIn = () => {
         <Text style={styles.textCheck}>Duy trì đăng nhập</Text>
       </ListItem>
       <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>Sign up</Text>
+        <Text style={styles.loginText}>Đăng nhập</Text>
       </TouchableOpacity>
       <TouchableHighlight onPress={SignUp}>
         <Text style={styles.text1}>Đăng ký tài khoản mới.</Text>
       </TouchableHighlight>
-
       <Text style={styles.text2}>Quên mật khẩu?</Text>
     </View>
   )

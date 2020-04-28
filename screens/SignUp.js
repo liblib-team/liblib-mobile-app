@@ -1,24 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-import {
-  Container,
-  Header,
-  Title,
-  Content,
-  Footer,
-  FooterTab,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-  Input,
-  Item,
-} from 'native-base'
+import { Icon } from 'native-base'
+import Colors from '../constants/Colors'
 
 const SignUp = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.signup}>Đăng ký tài khoản</Text>
       <View style={styles.inputView}>
         <TextInput
@@ -46,10 +33,16 @@ const SignUp = () => {
       <TouchableOpacity style={styles.loginBtn}>
         <Text style={styles.loginText}>Tạo tài khoản</Text>
       </TouchableOpacity>
+      <Text style={styles.text1}>Bạn đã có tài khoản?</Text>
+      <Text style={styles.text2}>Quay lại đăng nhập.</Text>
     </View>
   )
 }
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.white,
+    flex: 1,
+  },
   iconButton: {
     marginTop: 40,
     marginStart: 15,
@@ -89,6 +82,15 @@ const styles = StyleSheet.create({
     color: '#000',
     marginStart: 35,
     marginTop: 10,
+  },
+  text1: {
+    alignSelf: 'center',
+  },
+  text2: {
+    marginTop: 10,
+    alignSelf: 'center',
+    color: Colors.tintColor,
+    textDecorationLine: 'underline',
   },
 })
 export default SignUp
