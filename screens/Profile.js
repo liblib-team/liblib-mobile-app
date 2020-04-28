@@ -1,11 +1,19 @@
 import * as React from 'react'
-import { StyleSheet, Text } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { StyleSheet, Text, ScrollView } from 'react-native'
+import { Button } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Profile() {
+  const navigator = useNavigation()
+  const SignIn = () => {
+    navigator.navigate('SignIn', { title: 'Đăng nhập' })
+  }
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Text>Cài đặt, thông tin cá nhân</Text>
+      <Button onPress={SignIn}>
+        <Text>Đăng nhập tài khoản</Text>
+      </Button>
     </ScrollView>
   )
 }

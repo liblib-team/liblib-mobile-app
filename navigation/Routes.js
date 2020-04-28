@@ -5,6 +5,9 @@ import { createStackNavigator, HeaderTitle } from '@react-navigation/stack'
 import BottomTabNavigator from './BottomTabNavigator'
 import ViewAllBooks from '../components/oganism/listBook/ViewAllBooks'
 import BookDetails from '../screens/BookDetails'
+import Author from '../screens/Author'
+import SignIn from '../screens/SignIn'
+import SignUp from '../screens/SignUp'
 
 const Stack = createStackNavigator()
 
@@ -21,6 +24,9 @@ export default Routes = () => {
         options={optionsHeader}
       />
       <Stack.Screen name="BookDetails" component={BookDetails} options={optionsHeader} />
+      <Stack.Screen name="Author" component={Author} options={optionsHeader} />
+      <Stack.Screen name="SignIn" component={SignIn} options={optionsHeader} />
+      <Stack.Screen name="SignUp" component={SignUp} />
     </Stack.Navigator>
   )
 }

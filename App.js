@@ -5,10 +5,12 @@ import * as Font from 'expo-font'
 import { Ionicons } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { Provider } from 'react-redux'
 
 import BottomTabNavigator from './navigation/BottomTabNavigator'
 import useLinking from './navigation/useLinking'
 import Routes from './navigation/Routes'
+import store from './store'
 
 const Stack = createStackNavigator()
 
@@ -48,15 +50,17 @@ export default function App(props) {
     return null
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          {/* <Stack.Navigator>
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+            {/* <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator> */}
-          <Routes />
-        </NavigationContainer>
-      </View>
+            <Routes />
+          </NavigationContainer>
+        </View>
+      </Provider>
     )
   }
 }

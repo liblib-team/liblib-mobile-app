@@ -1,16 +1,15 @@
 import * as React from 'react'
 import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
 
-import BookItem from '../../molecules/books/BookItem'
+import BookbyAuthor from '../../molecules/bookDetails/BookbyAuthor'
 import Colors from '../../../constants/Colors'
-
-export default ViewAllBooks = () => {
+export default ListBookbyAuthor = (props) => {
   const books = [
     {
       id: '1',
       uri:
         'https://bizweb.dktcdn.net/100/197/269/products/phan-tich-chung-khoan-outline-26.jpg?v=1521167573353',
-      title: 'Memory',
+      title: 'Memory. This is a long title',
       author: 'Alexander',
     },
     {
@@ -49,15 +48,19 @@ export default ViewAllBooks = () => {
       author: 'Alexander',
     },
   ]
-
   return (
     <View>
       <SafeAreaView style={styles.container}>
         <FlatList
-          numColumns={2}
+          horizontal
           data={books}
           renderItem={({ item }) => (
-            <BookItem img={item.uri} title={item.title} author={item.author} />
+            <BookbyAuthor
+              id={item.id}
+              img={item.uri}
+              title={item.title}
+              author={item.author}
+            />
           )}
           keyExtractor={(item) => item.id}
         />
@@ -69,6 +72,5 @@ export default ViewAllBooks = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
-    justifyContent: 'space-around',
   },
 })

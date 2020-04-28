@@ -1,22 +1,35 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleSheet, Text, ScrollView, Button } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { connect, useDispatch } from 'react-redux'
 
 import ListBook from '../components/oganism/listBook/ListBook'
 import ViewMore from '../components/molecules/books/ViewMore'
 import Colors from '../constants/Colors'
 import ListRepresentativeBook from '../components/oganism/listBook/ListRepresentativeBook'
 import Collections from '../components/molecules/collections/Collections'
+import { queryLogin } from '../actions/login'
 
-export default HomeScreen = () => {
+const HomeScreen = (props) => {
+  const navigator = useNavigation()
+  const onGoToViewAll = (filterName) => {
+    navigator.navigate('ViewAllBooks', { title: filterName })
+  }
+
+  const onSubmit = () => {
+    props.queryLogin({})
+  }
+
   return (
     <ScrollView style={styles.container}>
       <ListRepresentativeBook />
-      <ViewMore filterName="Sách xem nhiều" />
+      <ViewMore filterName="Sách xem nhiều" onGoToViewAll={onGoToViewAll} />
       <ListBook />
       <Text style={styles.filter}>Bộ sưu tập</Text>
       <Collections />
-      <ViewMore filterName="Sách Hot" />
+      <ViewMore filterName="Sách Hot" onGoToViewAll={onGoToViewAll} />
       <ListBook />
+      <Button onPress={onSubmit} title="Click"></Button>
     </ScrollView>
   )
 }
@@ -39,3 +52,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
+
+const mapDispatchToProps = {
+  queryLogin,
+}
+
+export default connect(null, mapDispatchToProps)(HomeScreen)
