@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  TouchableHighlight,
+} from 'react-native'
 import { Icon, CheckBox, ListItem } from 'native-base'
 
 import Colors from '../constants/Colors'
@@ -57,8 +64,12 @@ const SignIn = (props) => {
       <TouchableOpacity style={styles.loginBtn} onPress={onSubmit}>
         <Text style={styles.loginText}>Đăng nhập</Text>
       </TouchableOpacity>
-      <Text style={styles.text1}>Đăng ký tài khoản mới.</Text>
-      <Text style={styles.text2}>Quên mật khẩu?</Text>
+      <TouchableHighlight>
+        <Text style={styles.text1}>Đăng ký tài khoản mới.</Text>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Text style={styles.text2}>Quên mật khẩu?</Text>
+      </TouchableHighlight>
     </View>
   )
 }
