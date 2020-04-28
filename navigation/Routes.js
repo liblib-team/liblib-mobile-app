@@ -8,6 +8,7 @@ import BookDetails from '../screens/BookDetails'
 import Author from '../screens/Author'
 import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
+import ChangePassword from '../screens/ChangePassword'
 
 const Stack = createStackNavigator()
 
@@ -27,6 +28,7 @@ export default Routes = () => {
       <Stack.Screen name="Author" component={Author} options={optionsHeader} />
       <Stack.Screen name="SignIn" component={SignIn} options={optionsHeader} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
     </Stack.Navigator>
   )
 }

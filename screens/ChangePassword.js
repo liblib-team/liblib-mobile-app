@@ -1,23 +1,16 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { Icon } from 'native-base'
-import Colors from '../constants/Colors'
 
-const SignUp = () => {
+import Colors from '../constants/Colors'
+const ChangePassword = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.signup}>Đăng ký tài khoản</Text>
+      <Text style={styles.signup}>Đổi mật khẩu</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder="Mã số sinh viên *"
-          placeholderTextColor="#708090"
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Mật khẩu *"
+          placeholder="Mật khẩu cũ *"
           placeholderTextColor="#708090"
         />
         <Icon name="eye" style={styles.eye} />
@@ -25,16 +18,22 @@ const SignUp = () => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder="Nhập lại mật khẩu *"
+          placeholder="Mật khẩu mới *"
+          placeholderTextColor="#708090"
+        />
+        <Icon name="eye" style={styles.eye} />
+      </View>
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.inputText}
+          placeholder="Nhập lại mật khẩu mới *"
           placeholderTextColor="#708090"
         ></TextInput>
         <Icon name="eye" style={styles.eye} />
       </View>
       <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>Tạo tài khoản</Text>
+        <Text style={styles.loginText}>Đổi mật khẩu</Text>
       </TouchableOpacity>
-      <Text style={styles.text1}>Bạn đã có tài khoản?</Text>
-      <Text style={styles.text2}>Quay lại đăng nhập.</Text>
     </View>
   )
 }
@@ -83,14 +82,5 @@ const styles = StyleSheet.create({
     marginStart: 35,
     marginTop: 10,
   },
-  text1: {
-    alignSelf: 'center',
-  },
-  text2: {
-    marginTop: 10,
-    alignSelf: 'center',
-    color: Colors.tintColor,
-    textDecorationLine: 'underline',
-  },
 })
-export default SignUp
+export default ChangePassword
