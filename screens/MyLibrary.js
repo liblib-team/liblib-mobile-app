@@ -1,39 +1,53 @@
 import * as React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, ScrollView } from 'react-native'
+import { DatePicker, Card, Icon } from 'native-base'
+
+import Colors from '../constants/Colors'
+import ListBookBrowed from '../components/oganism/myLibrary/ListBookBrowed'
 
 export default function MyLibrary() {
   return (
-    <View>
-      <Text>Sách đã mượn</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <Card style={styles.date}>
+        <Text style={styles.text}>Từ ngày:</Text>
+        <DatePicker
+          textStyle={{ color: Colors.tintColor }}
+          defaultDate={new Date(2018, 4, 4)}
+        ></DatePicker>
+        <Text style={styles.text}>Đến ngày:</Text>
+        <DatePicker
+          textStyle={{ color: Colors.tintColor }}
+          defaultDate={new Date(2018, 4, 4)}
+        ></DatePicker>
+
+        <Icon name="search" style={styles.iconSearch} />
+      </Card>
+      <ListBookBrowed />
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  date: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    padding: 5,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  text: {
+    alignSelf: 'center',
+    textAlignVertical: 'center',
+    fontSize: 15,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
   },
-  contentContainer: {
-    paddingTop: 15,
-  },
-  optionIconContainer: {
-    marginRight: 12,
-  },
-  option: {
-    backgroundColor: '#fdfdfd',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: 0,
-    borderColor: '#ededed',
-  },
-  lastOption: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  optionText: {
-    fontSize: 15,
-    alignSelf: 'flex-start',
-    marginTop: 1,
+  iconSearch: {
+    fontSize: 25,
+    alignSelf: 'center',
+    marginRight: 5,
   },
 })
