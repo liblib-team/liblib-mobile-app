@@ -1,7 +1,8 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED } from '../actions/action-type'
+import { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from '../actions/action-type'
+import { removeCurrentUser } from '../auth'
 
 const initState = {
-  user: {},
+  username: '',
   jwt: null,
   error: '',
 }
@@ -9,9 +10,12 @@ const initState = {
 export const authReducer = (state = initState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return { ...state, user: action.data.user, jwt: action.data.jwt }
+      return { ...state, username: action.data.username, jwt: action.data.jwt }
     case LOGIN_FAILED:
-      return { ...state, error: payload.error }
+      return { ...state, error: action.data, username: '', jwt: null }
+    case LOGOUT:
+      removeCurrentUser()
+      return { ...initState }
     default:
       return state
   }

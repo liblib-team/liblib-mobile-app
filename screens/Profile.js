@@ -2,17 +2,28 @@ import * as React from 'react'
 import { StyleSheet, Text, ScrollView } from 'react-native'
 import { Button } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
+import { connect } from 'react-redux'
+import { logoutAction } from '../actions/authActions'
 
-export default function Profile() {
+const Profile = (props) => {
   const navigator = useNavigation()
-  const SignIn = () => {
+  const onLogin = () => {
     navigator.navigate('SignIn', { title: 'Đăng nhập' })
   }
+
+  const onLogout = () => {
+    props.logout()
+    onLogin()
+  }
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Text>Cài đặt, thông tin cá nhân</Text>
-      <Button onPress={SignIn}>
+      <Button onPress={onLogin}>
         <Text>Đăng nhập tài khoản</Text>
+      </Button>
+      <Button onPress={onLogout}>
+        <Text>Đăng xuất</Text>
       </Button>
     </ScrollView>
   )
@@ -46,3 +57,9 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 })
+
+const mapDispatchToProps = {
+  logout: logoutAction,
+}
+
+export default connect(null, mapDispatchToProps)(Profile)

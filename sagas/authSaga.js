@@ -1,25 +1,43 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { LOGIN } from '../actions/action-type'
+import { SERVER_URL, setCurrentUser, removeCurrentUser } from '../auth'
+import { Toast } from 'native-base'
 
 const queryLogin = (params) => {
-  return {
-    user: { name: 'minh', id: '17020891' },
-    jwt: '2ojuof23804923j4eowef',
-  }
+  return new Promise((resolve, reject) => {
+    return fetch(SERVER_URL + 'user/login', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      method: 'POST',
+      body: JSON.stringify(params),
+    })
+      .then((response) => (response.status === 200 ? response : reject(response)))
+      .then((response) => response.json())
+      .then((response) =>
+        response.success ? resolve(response) : reject(response.message)
+      )
+      .catch((error) => reject(error))
+  })
 }
 
 function* doLogin(request) {
   try {
-    const data = request.data
-    const userData = yield call(queryLogin, request.data)
-
-    yield put({ type: request.response.success, data: userData })
+    const { message } = yield call(queryLogin, request.data)
+    yield put({ type: request.response.success, data: { ...request.data, jwt: message } })
+    setCurrentUser({ username: request.data.username, jwt: message })
   } catch (error) {
     yield put({ type: request.response.failed, data: error })
+    Toast.show({
+      text: error,
+      type: 'danger',
+    })
+    removeCurrentUser()
   }
 }
 
 export function* watchLogin() {
-  console.log('watch login')
   yield takeLatest(LOGIN, doLogin)
 }

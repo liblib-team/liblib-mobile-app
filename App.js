@@ -11,6 +11,7 @@ import BottomTabNavigator from './navigation/BottomTabNavigator'
 import useLinking from './navigation/useLinking'
 import Routes from './navigation/Routes'
 import store from './store'
+import { Root } from 'native-base'
 
 const Stack = createStackNavigator()
 
@@ -50,17 +51,19 @@ export default function App(props) {
     return null
   } else {
     return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-            {/* <Stack.Navigator>
+      <Root>
+        <Provider store={store}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+              {/* <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator> */}
-            <Routes />
-          </NavigationContainer>
-        </View>
-      </Provider>
+              <Routes />
+            </NavigationContainer>
+          </View>
+        </Provider>
+      </Root>
     )
   }
 }

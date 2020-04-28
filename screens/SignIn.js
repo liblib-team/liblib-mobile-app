@@ -1,23 +1,40 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  TouchableHighlight,
+} from 'react-native'
 import { Icon, CheckBox, ListItem } from 'native-base'
-import { useNavigation } from '@react-navigation/native'
 
 import Colors from '../constants/Colors'
-import { TouchableHighlight } from 'react-native-gesture-handler'
+import { queryLogin } from '../actions/authActions'
+import { connect } from 'react-redux'
 
-const SignIn = () => {
-  const navigator = useNavigation()
-  const [rememberMe, setrememberMe] = useState(true)
+const SignIn = (props) => {
+  const [rememberMe, setRememberMe] = useState(true)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  const handleButton = () => setrememberMe((previousState) => !previousState)
+  const handleButton = () => setRememberMe((previousState) => !previousState)
 
-  const SignUp = () => {
-    navigator.navigate('SignUp')
+  useEffect(() => {
+    if (props.auth.username) {
+      props.navigation.navigate('Trang chủ')
+    }
+    console.log(props.auth)
+  }, [props.auth])
+
+  const onSubmit = () => {
+    const params = {
+      username,
+      password,
+    }
+    props.queryLogin(params)
   }
-  const ChangePassword = () => {
-    navigator.navigate('ChangePassword')
-  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.signup}>Đăng nhập</Text>
@@ -26,6 +43,8 @@ const SignIn = () => {
           style={styles.inputText}
           placeholder="Mã số sinh viên *"
           placeholderTextColor={Colors.placeholderText}
+          value={username}
+          onChangeText={(text) => setUsername(text)}
         />
       </View>
       <View style={styles.inputView}>
@@ -33,6 +52,8 @@ const SignIn = () => {
           style={styles.inputText}
           placeholder="Mật khẩu *"
           placeholderTextColor={Colors.placeholderText}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
         />
         <Icon name="eye" style={styles.eye} />
       </View>
@@ -40,18 +61,19 @@ const SignIn = () => {
         <CheckBox checked={rememberMe} onPress={handleButton} />
         <Text style={styles.textCheck}>Duy trì đăng nhập</Text>
       </ListItem>
-      <TouchableOpacity style={styles.loginBtn}>
+      <TouchableOpacity style={styles.loginBtn} onPress={onSubmit}>
         <Text style={styles.loginText}>Đăng nhập</Text>
       </TouchableOpacity>
-      <TouchableHighlight onPress={SignUp}>
+      <TouchableHighlight>
         <Text style={styles.text1}>Đăng ký tài khoản mới.</Text>
       </TouchableHighlight>
-      <TouchableHighlight onPress={ChangePassword}>
+      <TouchableHighlight>
         <Text style={styles.text2}>Quên mật khẩu?</Text>
       </TouchableHighlight>
     </View>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
@@ -115,4 +137,13 @@ const styles = StyleSheet.create({
     color: Colors.tintColor,
   },
 })
-export default SignIn
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+})
+
+const mapDispatchToProps = {
+  queryLogin,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
