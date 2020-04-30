@@ -1,5 +1,5 @@
 import { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from '../actions/action-type'
-import { removeCurrentUser } from '../auth'
+import { removeCurrentUser } from '../../auth'
 
 const initState = {
   username: '',

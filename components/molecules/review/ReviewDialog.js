@@ -13,6 +13,7 @@ export default ReviewDialog = (props) => {
   const ratingCompleted = (rating) => {
     console.log(rating)
   }
+
   return (
     <View>
       <Dialog.Container

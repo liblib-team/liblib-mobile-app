@@ -10,7 +10,7 @@ import {
 import { Icon, CheckBox, ListItem } from 'native-base'
 
 import Colors from '../constants/Colors'
-import { queryLogin } from '../actions/authActions'
+import { queryLogin } from '../redux-saga/actions/auth.actions'
 import { connect } from 'react-redux'
 
 const SignIn = (props) => {
@@ -24,7 +24,6 @@ const SignIn = (props) => {
     if (props.auth.username) {
       props.navigation.navigate('Trang chủ')
     }
-    console.log(props.auth)
   }, [props.auth])
 
   const onSubmit = () => {

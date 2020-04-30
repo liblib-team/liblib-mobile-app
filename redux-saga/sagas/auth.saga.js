@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { LOGIN } from '../actions/action-type'
-import { SERVER_URL, setCurrentUser, removeCurrentUser } from '../auth'
+import { SERVER_URL, setCurrentUser, removeCurrentUser } from '../../auth'
 import { Toast } from 'native-base'
 
 const queryLogin = (params) => {
