@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import { authReducer } from './auth.reducer'
-import { topViewBooksReducer } from './topViewBooks.reducer'
+import { popularBooksReducer } from './popularBooks.reducer'
 
 const reducer = combineReducers({
   auth: authReducer,
-  topViewBooks: topViewBooksReducer,
+  popularBooks: popularBooksReducer,
 })
 
 export default reducer

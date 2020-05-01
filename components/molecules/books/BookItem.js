@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Card } from 'native-base'
 
 import CustomImage from '../../atoms/CustomImage'
@@ -8,7 +8,7 @@ import Layout from '../../../constants/Layout'
 import { useNavigation } from '@react-navigation/native'
 
 export default BookItem = (props) => {
-  const { id, img, title, author } = props
+  const { id, img, title, authors } = props
   const navigator = useNavigation()
 
   const onGoToBookDetails = (title) => {
@@ -20,7 +20,7 @@ export default BookItem = (props) => {
       <Card style={styles.container}>
         <CustomImage img={img} />
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.author}>{author}</Text>
+        <Text style={styles.author}>{authors}</Text>
       </Card>
     </TouchableOpacity>
   )
