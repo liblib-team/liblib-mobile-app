@@ -3,7 +3,7 @@ import { StyleSheet, Text, ScrollView } from 'react-native'
 import { Button } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
-import { logoutAction } from '../actions/authActions'
+import { logoutAction } from '../redux-saga/actions/auth.actions'
 
 const Profile = (props) => {
   const navigator = useNavigation()
