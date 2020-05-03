@@ -12,7 +12,7 @@ import ChangePassword from '../screens/ChangePassword'
 
 const Stack = createStackNavigator()
 
-const optionsHeader = ({ route }) => ({
+const optionsHeader = ({ navigation, route }) => ({
   title: route.params.title,
 })
 export default Routes = () => {

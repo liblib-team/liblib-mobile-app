@@ -19,7 +19,9 @@ export default BookItem = (props) => {
     <TouchableOpacity onPress={() => onGoToBookDetails(title)}>
       <Card style={styles.container}>
         <CustomImage img={img} />
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} numberOfLines={2}>
+          {title}
+        </Text>
         <Text style={styles.author}>{authors}</Text>
       </Card>
     </TouchableOpacity>
@@ -32,6 +34,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 10,
     justifyContent: 'center',
+    width: Layout.window.width * 0.4 + 20,
+    height: Layout.window.height * 0.4,
   },
   title: {
     fontSize: 16,
