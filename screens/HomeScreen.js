@@ -9,9 +9,8 @@ import ListRepresentativeBook from '../components/oganism/listBook/ListRepresent
 import Collections from '../components/molecules/collections/Collections'
 
 const HomeScreen = ({ navigation }) => {
-  const navigator = useNavigation()
-  const onGoToViewAll = (filterName) => {
-    navigation.navigate('ViewAllBooks', { title: filterName })
+  const onGoToViewAll = (filterName, id) => {
+    navigation.navigate('ViewAllBooks', { title: filterName, id: id })
   }
 
   return (
@@ -20,8 +19,8 @@ const HomeScreen = ({ navigation }) => {
       <ViewMore filterName="Sách xem nhiều" onGoToViewAll={onGoToViewAll} />
       <ListBook filterName="Sách xem nhiều" />
       <Text style={styles.filter}>Bộ sưu tập</Text>
-      <Collections />
-      <ViewMore filterName="Sách Hot" />
+      <Collections onGoToViewAll={onGoToViewAll} />
+      <ViewMore filterName="Sách Hot" onGoToViewAll={onGoToViewAll} />
       <ListBook filterName="Sách Hot" />
     </ScrollView>
   )

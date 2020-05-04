@@ -9,10 +9,11 @@ import Author from '../screens/Author'
 import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
 import ChangePassword from '../screens/ChangePassword'
+import Collections from '../components/molecules/collections/Collections'
 
 const Stack = createStackNavigator()
 
-const optionsHeader = ({ navigation, route }) => ({
+const optionsHeader = ({ route }) => ({
   title: route.params.title,
 })
 export default Routes = () => {
@@ -29,6 +30,7 @@ export default Routes = () => {
       <Stack.Screen name="SignIn" component={SignIn} options={optionsHeader} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="Collections" component={Collections} />
     </Stack.Navigator>
   )
 }

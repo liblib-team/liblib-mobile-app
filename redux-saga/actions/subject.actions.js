@@ -12,10 +12,3 @@ export const queryListSubjects = () => ({
     success: GET_LIST_SUBJECTS_SUCCESS,
   },
 })
-
-export const queryBooksBySubject = () => ({
-  type: GET_BOOKS_BY_SUBJECT,
-  response: {
-    success: GET_BOOKS_BY_SUBJECT_SUCCESS,
-  },
-})

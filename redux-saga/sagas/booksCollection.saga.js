@@ -1,6 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { Toast } from 'native-base'
-import { GET_TOP_VIEW_BOOK, GET_HOT_BOOKS } from '../actions/action-type'
+import {
+  GET_TOP_VIEW_BOOK,
+  GET_HOT_BOOKS,
+  GET_BOOKS_BY_SUBJECT,
+} from '../actions/action-type'
 import { SERVER_URL } from '../../auth'
 
 const queryPopularBook = () => {
@@ -25,10 +28,7 @@ function* doQueryPopularBook(request) {
     const data = yield call(queryPopularBook)
     yield put({ type: request.response.success, data: data })
   } catch (error) {
-    Toast.show({
-      text: error,
-      type: 'danger',
-    })
+    console.error(error)
   }
 }
 
@@ -54,10 +54,33 @@ function* doQueryHotBooks(request) {
     const data = yield call(queryHotBooks)
     yield put({ type: request.response.success, data: data })
   } catch (error) {
-    Toast.show({
-      text: error,
-      type: 'danger',
+    console.error(error)
+  }
+}
+
+const queryBooksBySubject = (id) => {
+  return new Promise((resolve, reject) => {
+    return fetch(SERVER_URL + 'book/list/subject/' + id, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      method: 'GET',
     })
+      .then((response) => (response.status === 200 ? response : reject(response)))
+      .then((response) => response.json())
+      .then((response) => resolve(response))
+      .catch((error) => reject(error))
+  })
+}
+
+function* doQueryBooksBySubject(request) {
+  try {
+    const data = yield call(queryBooksBySubject, request.id)
+    yield put({ type: request.response.success, data: data })
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -66,4 +89,8 @@ export function* watchQueryPopularBook() {
 }
 export function* watchQueryHotBooks() {
   yield takeLatest(GET_HOT_BOOKS, doQueryHotBooks)
+}
+
+export function* watchQueryBooksBySubject() {
+  yield takeLatest(GET_BOOKS_BY_SUBJECT, doQueryBooksBySubject)
 }

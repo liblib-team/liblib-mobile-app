@@ -29,7 +29,6 @@ class Collection extends React.Component {
   render() {
     let Subjects = []
     Subjects = this.props.listSubjects
-
     return (
       <View>
         {Subjects.length > 0 && (
@@ -43,6 +42,9 @@ class Collection extends React.Component {
                   styles.card,
                   { backgroundColor: background[Math.floor(Math.random() * 8)] },
                 ]}
+                onPress={() => {
+                  this.props.onGoToViewAll(item.name, item.id)
+                }}
               >
                 <Text
                   adjustsFontSizeToFit={true}

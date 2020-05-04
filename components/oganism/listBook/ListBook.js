@@ -41,7 +41,7 @@ class ListBook extends React.Component {
                 <BookItem
                   img={item.image}
                   title={item.title}
-                  authors={item.authors.map((author) => author.name + ' ')}
+                  authors={item.authors.map((author) => author.name).join(', ')}
                 />
               )}
               keyExtractor={(item) => item.id}

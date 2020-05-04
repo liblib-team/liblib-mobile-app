@@ -1,7 +1,11 @@
 import { all } from 'redux-saga/effects'
 
 import { watchLogin } from './auth.saga'
-import { watchQueryPopularBook, watchQueryHotBooks } from './popularBook.saga'
+import {
+  watchQueryPopularBook,
+  watchQueryHotBooks,
+  watchQueryBooksBySubject,
+} from './booksCollection.saga'
 import { watchQueryListSubjects } from './subject.saga'
 
 export default function* rootSaga() {
@@ -10,5 +14,6 @@ export default function* rootSaga() {
     watchQueryPopularBook(),
     watchQueryHotBooks(),
     watchQueryListSubjects(),
+    watchQueryBooksBySubject(),
   ])
 }

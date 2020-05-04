@@ -4,7 +4,7 @@ export const listSubjects = (state = [], action) => {
   switch (action.type) {
     case GET_LIST_SUBJECTS_SUCCESS:
       return [...action.data]
-    default: 
+    default:
       return state
   }
 }
