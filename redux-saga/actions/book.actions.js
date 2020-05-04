@@ -5,6 +5,8 @@ import {
   GET_HOT_BOOKS_SUCCESS,
   GET_BOOKS_BY_SUBJECT,
   GET_BOOKS_BY_SUBJECT_SUCCESS,
+  GET_BOOK_DETAIL,
+  GET_BOOK_DETAIL_SUCCESS,
 } from './action-type'
 
 export const queryPopularBook = () => ({
@@ -25,5 +27,13 @@ export const queryBooksBySubject = (id) => ({
   response: {
     success: GET_BOOKS_BY_SUBJECT_SUCCESS,
   },
-  id
+  id,
+})
+
+export const queryBookDetail = (id) => ({
+  type: GET_BOOK_DETAIL,
+  response: {
+    success: GET_BOOK_DETAIL_SUCCESS,
+  },
+  id,
 })

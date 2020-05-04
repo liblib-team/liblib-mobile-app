@@ -11,12 +11,12 @@ export default BookItem = (props) => {
   const { id, img, title, authors } = props
   const navigator = useNavigation()
 
-  const onGoToBookDetails = (title) => {
-    navigator.navigate('BookDetails', { title: title })
+  const onGoToBookDetails = (title, id) => {
+    navigator.navigate('BookDetails', { title: title, id: id })
   }
 
   return (
-    <TouchableOpacity onPress={() => onGoToBookDetails(title)}>
+    <TouchableOpacity onPress={() => onGoToBookDetails(title, id)}>
       <Card style={styles.container}>
         <CustomImage img={img} />
         <Text style={styles.title} numberOfLines={2}>

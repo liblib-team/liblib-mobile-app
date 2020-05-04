@@ -7,6 +7,7 @@ import {
   watchQueryBooksBySubject,
 } from './booksCollection.saga'
 import { watchQueryListSubjects } from './subject.saga'
+import { watchQueryBookDetail } from './bookDetail.saga'
 
 export default function* rootSaga() {
   yield all([
@@ -15,5 +16,6 @@ export default function* rootSaga() {
     watchQueryHotBooks(),
     watchQueryListSubjects(),
     watchQueryBooksBySubject(),
+    watchQueryBookDetail(),
   ])
 }

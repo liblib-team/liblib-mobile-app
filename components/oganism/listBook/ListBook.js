@@ -39,6 +39,7 @@ class ListBook extends React.Component {
               data={books}
               renderItem={({ item }) => (
                 <BookItem
+                  id={item.id}
                   img={item.image}
                   title={item.title}
                   authors={item.authors.map((author) => author.name).join(', ')}

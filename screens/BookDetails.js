@@ -12,7 +12,7 @@ import ListBook from '../components/oganism/listBook/ListBook'
 import ReviewDialog from '../components/molecules/review/ReviewDialog'
 
 export default BookDetails = ({ route }) => {
-  const title = route.params.title
+  const id = route.params.id
   const navigator = useNavigation()
   const [visibleDiaglog, setVisibleDialog] = useState(false)
   const onCancel = () => {
@@ -26,7 +26,7 @@ export default BookDetails = ({ route }) => {
   }
   return (
     <ScrollView style={styles.container}>
-      <BookInfo title={title} author="alexander" />
+      <BookInfo id={id} />
       <Text style={styles.filter}>Bình luận nổi bật</Text>
       <Review rating="3" comment="Nice book" />
       <Review rating="5" comment="Very good" />

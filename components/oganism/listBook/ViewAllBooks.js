@@ -58,6 +58,7 @@ class ViewAllBooks extends Component {
               data={books}
               renderItem={({ item }) => (
                 <BookItem
+                  id={item.id}
                   img={item.image}
                   title={item.title}
                   authors={item.authors.map((author) => author.name).join(', ')}
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
+  booksCollection: state.booksCollection,
   popularBooks: state.popularBooks,
   hotBooks: state.hotBooks,
   booksBySubject: state.booksBySubject,
