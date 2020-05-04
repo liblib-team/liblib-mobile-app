@@ -1,11 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { Toast } from 'native-base'
-import { GET_TOP_VIEW_BOOK } from '../actions/action-type'
+import { GET_LIST_SUBJECTS } from '../actions/action-type'
 import { SERVER_URL } from '../../auth'
 
-const queryPopularBook = () => {
+const queryListSubjects = () => {
   return new Promise((resolve, reject) => {
-    return fetch(SERVER_URL + 'book/list/popular', {
+    return fetch(SERVER_URL + 'subject/list', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -20,19 +19,15 @@ const queryPopularBook = () => {
   })
 }
 
-function* doQueryPopularBook(request) {
+function* doQueryListSubjects(request) {
   try {
-    const data = yield call(queryPopularBook)
-    console.log(data)
+    const data = yield call(queryListSubjects)
     yield put({ type: request.response.success, data: data })
   } catch (error) {
-    Toast.show({
-      text: error,
-      type: 'danger',
-    })
+    console.log(error)
   }
 }
 
-export function* watchQueryPopularBook() {
-  yield takeLatest(GET_TOP_VIEW_BOOK, doQueryPopularBook)
+export function* watchQueryListSubjects() {
+  yield takeLatest(GET_LIST_SUBJECTS, doQueryListSubjects)
 }

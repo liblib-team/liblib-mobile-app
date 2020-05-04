@@ -4,8 +4,12 @@ import { connect } from 'react-redux'
 
 import BookItem from '../../molecules/books/BookItem'
 import Colors from '../../../constants/Colors'
-import { queryPopularBook } from '../../../redux-saga/actions/book.actions'
-import { LIST_BOOK_TITLE } from '../../../constants/TYPE'
+import {
+  queryPopularBook,
+  queryHotBooks,
+  queryBooksBySubject,
+} from '../../../redux-saga/actions/book.actions'
+import { LIST_BOOK_TITLE } from '../../../constants/Type'
 
 class ViewAllBooks extends Component {
   constructor(props) {
@@ -14,8 +18,13 @@ class ViewAllBooks extends Component {
 
   componentDidMount() {
     const { title } = this.props.route.params
+    const { id } = this.props.route.params
     if (title === LIST_BOOK_TITLE.TOP_VIEW_BOOKS) {
       this.props.queryPopularBook()
+    } else if (title === LIST_BOOK_TITLE.TOP_HOT_BOOKS) {
+      this.props.queryHotBooks()
+    } else {
+      this.props.queryBooksBySubject(id)
     }
   }
 
@@ -35,6 +44,10 @@ class ViewAllBooks extends Component {
     const { title } = this.props.route.params
     if (title === LIST_BOOK_TITLE.TOP_VIEW_BOOKS) {
       books = this.props.popularBooks
+    } else if (title === LIST_BOOK_TITLE.TOP_HOT_BOOKS) {
+      books = this.props.hotBooks
+    } else {
+      books = this.props.booksBySubject
     }
     return (
       <View>
@@ -43,7 +56,13 @@ class ViewAllBooks extends Component {
             <FlatList
               numColumns={2}
               data={books}
-              renderItem={({ item }) => <BookItem img={item.image} title={item.title} />}
+              renderItem={({ item }) => (
+                <BookItem
+                  img={item.image}
+                  title={item.title}
+                  authors={item.authors.map((author) => author.name).join(', ')}
+                />
+              )}
               keyExtractor={(item) => item.id}
             />
           )}
@@ -62,10 +81,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   popularBooks: state.popularBooks,
+  hotBooks: state.hotBooks,
+  booksBySubject: state.booksBySubject,
 })
 
 const mapDispatchToProps = {
   queryPopularBook,
+  queryHotBooks,
+  queryBooksBySubject,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewAllBooks)
