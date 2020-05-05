@@ -26,8 +26,8 @@ class BookInfo extends React.Component {
   }
   render() {
     const { isShowMoreInfo } = this.state
-    let book = {}
-    book = this.props.bookDetail
+    const book = this.props.bookDetail
+    console.log(book)
     return (
       <View>
         <View style={styles.container}>
@@ -39,9 +39,10 @@ class BookInfo extends React.Component {
                   {book.title}
                 </Text>
               </View>
-
               <Text style={styles.author}>
-                {book.authors.map((author) => author.name).join(', ')}
+                {book && book.authors
+                  ? book.authors.map((author) => author.name).join(', ')
+                  : ''}
               </Text>
               <View style={[styles.inLine, { marginLeft: 5 }]}>
                 <Rating startingValue={book.point} imageSize={15} readonly />

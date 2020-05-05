@@ -1,16 +1,18 @@
 import { combineReducers } from 'redux'
 import { authReducer } from './auth.reducer'
-import { booksCollectionReducer } from './booksCollection.reducer'
+import { booksBySubjectReducer } from './booksBySubject.reducer'
 import { listSubjects } from './subject.reducer'
 import { bookDetailReducer } from './bookDetail.reducer'
+import { hotBooksReducer } from './hotBooks.reducer'
+import { popularBooksReducer } from './popularBooks.reducer'
 
 const reducer = combineReducers({
   auth: authReducer,
-  popularBooks: booksCollectionReducer,
-  hotBooks: booksCollectionReducer,
   listSubjects: listSubjects,
-  booksBySubject: booksCollectionReducer,
   bookDetail: bookDetailReducer,
+  booksBySubject: booksBySubjectReducer,
+  hotBooks: hotBooksReducer,
+  popularBooks: popularBooksReducer,
 })
 
 export default reducer

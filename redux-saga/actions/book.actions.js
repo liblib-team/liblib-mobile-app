@@ -1,6 +1,6 @@
 import {
-  GET_TOP_VIEW_BOOK,
-  GET_TOP_VIEW_BOOK_SUCCESS,
+  GET_POPULAR_BOOK,
+  GET_POPULAR_BOOK_SUCCESS,
   GET_HOT_BOOKS,
   GET_HOT_BOOKS_SUCCESS,
   GET_BOOKS_BY_SUBJECT,
@@ -10,9 +10,9 @@ import {
 } from './action-type'
 
 export const queryPopularBook = () => ({
-  type: GET_TOP_VIEW_BOOK,
+  type: GET_POPULAR_BOOK,
   response: {
-    success: GET_TOP_VIEW_BOOK_SUCCESS,
+    success: GET_POPULAR_BOOK_SUCCESS,
   },
 })
 export const queryHotBooks = () => ({

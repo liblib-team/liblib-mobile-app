@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  booksCollection: state.booksCollection,
   popularBooks: state.popularBooks,
   hotBooks: state.hotBooks,
   booksBySubject: state.booksBySubject,

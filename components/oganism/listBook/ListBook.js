@@ -23,13 +23,14 @@ class ListBook extends React.Component {
 
   render() {
     let books = []
-    let title = this.props.filterName
+    const title = this.props.filterName
     if (title === LIST_BOOK_TITLE.TOP_VIEW_BOOKS) {
       books = this.props.popularBooks
     } else if (title === LIST_BOOK_TITLE.TOP_HOT_BOOKS) {
       books = this.props.hotBooks
+    } else {
+      books = this.props.booksBySubject
     }
-
     return (
       <View>
         <SafeAreaView style={styles.container}>
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   popularBooks: state.popularBooks,
   hotBooks: state.hotBooks,
+  booksBySubject: state.booksBySubject,
 })
 
 const mapDispatchToProps = {

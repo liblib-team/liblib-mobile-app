@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {
-  GET_TOP_VIEW_BOOK,
+  GET_POPULAR_BOOK,
   GET_HOT_BOOKS,
   GET_BOOKS_BY_SUBJECT,
 } from '../actions/action-type'
@@ -85,7 +85,7 @@ function* doQueryBooksBySubject(request) {
 }
 
 export function* watchQueryPopularBook() {
-  yield takeLatest(GET_TOP_VIEW_BOOK, doQueryPopularBook)
+  yield takeLatest(GET_POPULAR_BOOK, doQueryPopularBook)
 }
 export function* watchQueryHotBooks() {
   yield takeLatest(GET_HOT_BOOKS, doQueryHotBooks)
