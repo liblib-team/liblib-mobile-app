@@ -27,7 +27,6 @@ class BookInfo extends React.Component {
   render() {
     const { isShowMoreInfo } = this.state
     const book = this.props.bookDetail
-    console.log(book)
     return (
       <View>
         <View style={styles.container}>

@@ -1,15 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { GET_LIST_SUBJECTS } from '../actions/action-type'
-import { SERVER_URL } from '../../auth'
+import { SERVER_URL, getHeaders } from '../../auth'
 
 const queryListSubjects = () => {
   return new Promise((resolve, reject) => {
     return fetch(SERVER_URL + 'subject/list', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: getHeaders(false),
       method: 'GET',
     })
       .then((response) => (response.status === 200 ? response : reject(response)))

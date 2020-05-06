@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-
+import store from '../store'
 const isAuth = async () => {
   try {
     const user = JSON.parse(AsyncStorage.getItem('liblibUser'))
@@ -40,4 +40,26 @@ const removeCurrentUser = () => {
 
 const SERVER_URL = 'http://blueto0th.ddns.net:5000/api/'
 
-export { isAuth, setCurrentUser, getCurrentUser, removeCurrentUser, SERVER_URL }
+const getHeaders = (withAuth) => {
+  const authToken = store.getState().auth.jwt
+  const headersWithoutAuth = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  }
+  if (withAuth && authToken !== null) {
+    return {
+      ...headersWithoutAuth,
+      Authorization: `Bearer ${authToken}`,
+    }
+  }
+  return headersWithoutAuth
+}
+export {
+  isAuth,
+  setCurrentUser,
+  getCurrentUser,
+  removeCurrentUser,
+  SERVER_URL,
+  getHeaders,
+}

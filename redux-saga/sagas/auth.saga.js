@@ -1,16 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { LOGIN } from '../actions/action-type'
-import { SERVER_URL, setCurrentUser, removeCurrentUser } from '../../auth'
+import { SERVER_URL, setCurrentUser, removeCurrentUser, getHeaders } from '../../auth'
 import { Toast } from 'native-base'
 
 const queryLogin = (params) => {
   return new Promise((resolve, reject) => {
     return fetch(SERVER_URL + 'user/login', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: getHeaders(false),
       method: 'POST',
       body: JSON.stringify(params),
     })

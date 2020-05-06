@@ -10,6 +10,7 @@ import {
   queryBooksBySubject,
 } from '../../../redux-saga/actions/book.actions'
 import { LIST_BOOK_TITLE } from '../../../constants/Type'
+import store from '../../../store'
 
 class ViewAllBooks extends Component {
   constructor(props) {

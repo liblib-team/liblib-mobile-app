@@ -28,10 +28,7 @@ export default BookDetails = ({ route }) => {
     <ScrollView style={styles.container}>
       <BookInfo id={id} />
       <Text style={styles.filter}>Bình luận nổi bật</Text>
-      <Review rating="3" comment="Nice book" />
-      <Review rating="5" comment="Very good" />
-      <Review rating="2" comment="Not bad" />
-      <Review rating="5" comment="This is a long line" />
+      <Review id={id} />
       <TouchableWithoutFeedback onPress={showDialog}>
         <Card style={styles.review}>
           <CardItem>

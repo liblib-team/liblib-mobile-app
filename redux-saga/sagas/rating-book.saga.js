@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { GET_BOOK_DETAIL } from '../actions/action-type'
 import { SERVER_URL, getHeaders } from '../../auth'
+import { GET_RATING_BOOK } from '../actions/action-type'
 
-const queryBookDetail = (id) => {
+const queryGetRatingBook = (id) => {
   return new Promise((resolve, reject) => {
-    return fetch(SERVER_URL + 'book/detail/' + id, {
-      headers: getHeaders(false),
+    return fetch(SERVER_URL + 'rating/list/' + id, {
+      headers: getHeaders(true),
       method: 'GET',
     })
       .then((response) => (response.status === 200 ? response : reject(response)))
@@ -15,15 +15,16 @@ const queryBookDetail = (id) => {
   })
 }
 
-function* doQueryBookDetail(request) {
+function* doQueryGetRatingBook(request) {
   try {
-    const data = yield call(queryBookDetail, request.id)
+    const data = yield call(queryGetRatingBook, request.id)
+    console.log(data)
     yield put({ type: request.response.success, data: data })
   } catch (error) {
     console.error(error)
   }
 }
 
-export function* watchQueryBookDetail() {
-  yield takeLatest(GET_BOOK_DETAIL, doQueryBookDetail)
+export function* watchQueryGetRatingBook() {
+  yield takeLatest(GET_RATING_BOOK, doQueryGetRatingBook)
 }
