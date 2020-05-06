@@ -5,7 +5,7 @@ import { listSubjects } from './subject.reducer'
 import { bookDetailReducer } from './bookDetail.reducer'
 import { hotBooksReducer } from './hotBooks.reducer'
 import { popularBooksReducer } from './popularBooks.reducer'
-import { ratingBookReducer } from './rating-book.reducer'
+import { ratingBookReducer, postRatingBookReducer } from './rating-book.reducer'
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -15,6 +15,7 @@ const reducer = combineReducers({
   hotBooks: hotBooksReducer,
   popularBooks: popularBooksReducer,
   listRatingBook: ratingBookReducer,
+  reviewBook: postRatingBookReducer,
 })
 
 export default reducer

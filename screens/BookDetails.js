@@ -21,6 +21,9 @@ export default BookDetails = ({ route }) => {
   const showDialog = () => {
     setVisibleDialog(true)
   }
+  const onRate = () => {
+    setVisibleDialog(false)
+  }
   const onGoToViewAll = (filterName) => {
     navigator.navigate('Author', { title: filterName })
   }
@@ -38,7 +41,12 @@ export default BookDetails = ({ route }) => {
           </CardItem>
         </Card>
       </TouchableWithoutFeedback>
-      <ReviewDialog onCancel={onCancel} visibleDiaglog={visibleDiaglog} />
+      <ReviewDialog
+        onCancel={onCancel}
+        onRate={onRate}
+        visibleDiaglog={visibleDiaglog}
+        id={id}
+      />
       <ViewMore filterName="Sách cùng tác giả" onGoToViewAll={onGoToViewAll} />
       <ListBookbyAuthor />
       <Text style={styles.filter}>Có thể bạn cũng thích</Text>
