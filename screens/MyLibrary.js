@@ -4,6 +4,7 @@ import { Tab, Tabs } from 'native-base'
 
 import ListBookBrowed from '../components/oganism/myLibrary/ListBookBrowed'
 import Colors from '../constants/Colors'
+import ListBookRevered from '../components/oganism/myLibrary/ListBookReserved'
 
 export default function MyLibrary() {
   return (
@@ -13,7 +14,7 @@ export default function MyLibrary() {
         tabStyle={{ backgroundColor: Colors.tintColor }}
         activeTabStyle={{ backgroundColor: Colors.tintColor }}
       >
-        <Text>Sách đã đặt</Text>
+        <ListBookRevered />
       </Tab>
       <Tab
         heading="Sách đã mượn"
