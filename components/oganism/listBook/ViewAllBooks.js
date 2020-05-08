@@ -1,69 +1,75 @@
-import * as React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
+import { connect } from 'react-redux'
 
 import BookItem from '../../molecules/books/BookItem'
 import Colors from '../../../constants/Colors'
+import {
+  queryPopularBook,
+  queryHotBooks,
+  queryBooksBySubject,
+} from '../../../redux-saga/actions/book.actions'
+import { LIST_BOOK_TITLE } from '../../../constants/Type'
 
-export default ViewAllBooks = () => {
-  const books = [
-    {
-      id: '1',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/phan-tich-chung-khoan-outline-26.jpg?v=1521167573353',
-      title: 'Memory',
-      author: 'Alexander',
-    },
-    {
-      id: '2',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/thuat-doc-tam.png?v=1568685712587',
-      title: 'About yourself',
-      author: 'Alexander',
-    },
-    {
-      id: '3',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/buoi-sang-dieu-ky-danh-cho-nha-ban-hang-01.jpg?v=1561185496810',
-      title: 'Its',
-      author: 'Alexander',
-    },
-    {
-      id: '4',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/sach-titan-gia-toc-rockefeller.jpg?v=1586842846807',
-      title: 'Sat',
-      author: 'Alexander',
-    },
-    {
-      id: '5',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/sach-titan-gia-toc-rockefeller.jpg?v=1586842846807',
-      title: 'Sat',
-      author: 'Alexander',
-    },
-    {
-      id: '6',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/tao-lap-mo-hinh-kinh-doanh.jpg?v=1527215308757',
-      title: 'Sat',
-      author: 'Alexander',
-    },
-  ]
+class ViewAllBooks extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-  return (
-    <View>
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          numColumns={2}
-          data={books}
-          renderItem={({ item }) => (
-            <BookItem img={item.uri} title={item.title} author={item.author} />
+  componentDidMount() {
+    const { title } = this.props.route.params
+    const { id } = this.props.route.params
+    if (title === LIST_BOOK_TITLE.TOP_VIEW_BOOKS) {
+      this.props.queryPopularBook()
+    } else if (title === LIST_BOOK_TITLE.TOP_HOT_BOOKS) {
+      this.props.queryHotBooks()
+    } else {
+      this.props.queryBooksBySubject(id)
+    }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (this.props.route.params.title !== nextProps.route.params.title) {
+      return true
+    }
+
+    if (this.props.popularBooks !== nextProps.popularBooks) {
+      return true
+    }
+    return false
+  }
+
+  render() {
+    let books = []
+    const { title } = this.props.route.params
+    if (title === LIST_BOOK_TITLE.TOP_VIEW_BOOKS) {
+      books = this.props.popularBooks
+    } else if (title === LIST_BOOK_TITLE.TOP_HOT_BOOKS) {
+      books = this.props.hotBooks
+    } else {
+      books = this.props.booksBySubject
+    }
+    return (
+      <View>
+        <SafeAreaView style={styles.container}>
+          {books.length > 0 && (
+            <FlatList
+              numColumns={2}
+              data={books}
+              renderItem={({ item }) => (
+                <BookItem
+                  img={item.image}
+                  title={item.title}
+                  authors={item.authors.map((author) => author.name).join(', ')}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+            />
           )}
-          keyExtractor={(item) => item.id}
-        />
-      </SafeAreaView>
-    </View>
-  )
+        </SafeAreaView>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -72,3 +78,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
 })
+
+const mapStateToProps = (state) => ({
+  popularBooks: state.popularBooks,
+  hotBooks: state.hotBooks,
+  booksBySubject: state.booksBySubject,
+})
+
+const mapDispatchToProps = {
+  queryPopularBook,
+  queryHotBooks,
+  queryBooksBySubject,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewAllBooks)

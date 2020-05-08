@@ -19,6 +19,7 @@ export default {
   pink: '#ff8080',
   blue: '#80b3ff',
   green: '#80ff80',
+  orange: '#ff6600',
   black: '#000',
   placeholderText: '#708090',
 }

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Card } from 'native-base'
 
 import CustomImage from '../../atoms/CustomImage'
@@ -8,7 +8,7 @@ import Layout from '../../../constants/Layout'
 import { useNavigation } from '@react-navigation/native'
 
 export default BookItem = (props) => {
-  const { id, img, title, author } = props
+  const { id, img, title, authors } = props
   const navigator = useNavigation()
 
   const onGoToBookDetails = (title) => {
@@ -19,8 +19,10 @@ export default BookItem = (props) => {
     <TouchableOpacity onPress={() => onGoToBookDetails(title)}>
       <Card style={styles.container}>
         <CustomImage img={img} />
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.author}>{author}</Text>
+        <Text style={styles.title} numberOfLines={2}>
+          {title}
+        </Text>
+        <Text style={styles.author}>{authors}</Text>
       </Card>
     </TouchableOpacity>
   )
@@ -32,6 +34,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 10,
     justifyContent: 'center',
+    width: Layout.window.width * 0.4 + 20,
+    height: Layout.window.height * 0.4,
   },
   title: {
     fontSize: 16,
