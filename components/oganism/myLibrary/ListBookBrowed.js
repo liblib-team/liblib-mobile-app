@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
+import { StyleSheet, SafeAreaView, ScrollView, View, Text, FlatList } from 'react-native'
+import { DatePicker, Card, Icon } from 'native-base'
 
 import Colors from '../../../constants/Colors'
 import BookBrowed from '../../molecules/books/BookBrowed'
@@ -47,7 +48,21 @@ export default ListBookBrowed = (props) => {
     },
   ]
   return (
-    <View>
+    <ScrollView>
+      <Card style={styles.date}>
+        <Text style={styles.text}>Từ ngày:</Text>
+        <DatePicker
+          textStyle={{ color: Colors.tintColor }}
+          defaultDate={new Date(2018, 4, 4)}
+        ></DatePicker>
+        <Text style={styles.text}>Đến ngày:</Text>
+        <DatePicker
+          textStyle={{ color: Colors.tintColor }}
+          defaultDate={new Date(2018, 4, 4)}
+        ></DatePicker>
+
+        <Icon name="search" style={styles.iconSearch} />
+      </Card>
       <SafeAreaView style={styles.container}>
         <FlatList
           vertical
@@ -66,12 +81,34 @@ export default ListBookBrowed = (props) => {
           keyExtractor={(item) => item.id}
         />
       </SafeAreaView>
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+  },
+  date: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    padding: 5,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  text: {
+    alignSelf: 'center',
+    textAlignVertical: 'center',
+    fontSize: 15,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fafafa',
+  },
+  iconSearch: {
+    fontSize: 25,
+    alignSelf: 'center',
+    marginRight: 5,
   },
 })
