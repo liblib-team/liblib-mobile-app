@@ -1,4 +1,8 @@
-import { GET_RATING_BOOK_SUCCESS, POST_RATING_BOOK_SUCCESS } from '../actions/action-type'
+import {
+  GET_RATING_BOOK_SUCCESS,
+  POST_RATING_BOOK_SUCCESS,
+  POST_RATING_BOOK_FAILED,
+} from '../actions/action-type'
 
 const review = {
   bookId: '',
@@ -20,9 +24,11 @@ export const postRatingBookReducer = (state = review, action) => {
     case POST_RATING_BOOK_SUCCESS:
       return {
         ...state,
-        bookId: action.data.bookId,
-        point: action.data.point,
-        comment: action.data.comment,
+      }
+    case POST_RATING_BOOK_FAILED:
+      return {
+        ...state,
+        error: action.data,
       }
     default:
       return state

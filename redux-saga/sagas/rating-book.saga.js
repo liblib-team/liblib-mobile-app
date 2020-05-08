@@ -19,7 +19,6 @@ const queryGetRatingBook = (id) => {
 function* doQueryGetRatingBook(request) {
   try {
     const data = yield call(queryGetRatingBook, request.id)
-    console.log(data)
     yield put({ type: request.response.success, data: data })
   } catch (error) {
     console.error(error)
@@ -31,7 +30,11 @@ const queryPostRatingBook = (review) => {
     return fetch(SERVER_URL + 'rating/post', {
       headers: getHeaders(true),
       method: 'POST',
-      body: JSON.stringify(review),
+      body: JSON.stringify({
+        bookId: review.bookId,
+        point: review.point,
+        comment: review.comment,
+      }),
     })
       .then((response) => (response.status === 200 ? response : reject(response)))
       .then((response) => response.json())
@@ -43,11 +46,16 @@ const queryPostRatingBook = (review) => {
 function* doQueryPostRatingBook(request) {
   try {
     const { message } = yield call(queryPostRatingBook, request.review)
-    yield put({ type: request.response.success })
+    yield put({ type: request.response.success, review: { ...request.data } })
+    Toast.show({
+      text: 'Bình luận thành công',
+      type: 'success',
+    })
   } catch (error) {
     yield put({ type: request.response.failed })
+    console.log(error)
     Toast.show({
-      text: error,
+      text: 'Bình luận không thành công',
       type: 'danger',
     })
   }

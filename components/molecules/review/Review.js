@@ -16,7 +16,6 @@ class Review extends React.Component {
 
   componentDidMount() {
     const { id } = this.props
-    console.log(id)
     this.props.queryGetRatingBook(id)
   }
   render() {

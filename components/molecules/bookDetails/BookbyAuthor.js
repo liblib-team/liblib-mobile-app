@@ -7,7 +7,7 @@ import Colors from '../../../constants/Colors'
 import Layout from '../../../constants/Layout'
 
 export default BookbyAuthor = (props) => {
-  const { title, author, img } = props
+  const { title, authors, img, description } = props
   return (
     <View style={styles.container}>
       <Card style={styles.inLine}>
@@ -22,13 +22,11 @@ export default BookbyAuthor = (props) => {
                 {title}
               </Text>
             </View>
-            <Text style={styles.author}>{author}</Text>
+            <Text style={styles.author}>{authors}</Text>
           </View>
           <View style={styles.customTitle}>
             <Text style={styles.description} numberOfLines={5} ellipsizeMode="head">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the
-              1500s.
+              {description}
             </Text>
           </View>
         </View>

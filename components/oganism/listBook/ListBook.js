@@ -4,7 +4,11 @@ import { connect } from 'react-redux'
 
 import BookItem from '../../molecules/books/BookItem'
 import Colors from '../../../constants/Colors'
-import { queryPopularBook, queryHotBooks } from '../../../redux-saga/actions/book.actions'
+import {
+  queryPopularBook,
+  queryHotBooks,
+  queryRelevanceBooks,
+} from '../../../redux-saga/actions/book.actions'
 import { LIST_BOOK_TITLE } from '../../../constants/Type'
 
 class ListBook extends React.Component {
@@ -13,11 +17,14 @@ class ListBook extends React.Component {
   }
   componentDidMount() {
     const title = this.props.filterName
+    const { id } = this.props
     if (title === LIST_BOOK_TITLE.TOP_VIEW_BOOKS) {
       this.props.queryPopularBook()
     }
     if (title === LIST_BOOK_TITLE.TOP_HOT_BOOKS) {
       this.props.queryHotBooks()
+    } else {
+      this.props.queryRelevanceBooks(id)
     }
   }
 
@@ -29,8 +36,9 @@ class ListBook extends React.Component {
     } else if (title === LIST_BOOK_TITLE.TOP_HOT_BOOKS) {
       books = this.props.hotBooks
     } else {
-      books = this.props.booksBySubject
+      books = this.props.relevanceBooks
     }
+
     return (
       <View>
         <SafeAreaView style={styles.container}>
@@ -64,12 +72,13 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   popularBooks: state.popularBooks,
   hotBooks: state.hotBooks,
-  booksBySubject: state.booksBySubject,
+  relevanceBooks: state.relevanceBooks,
 })
 
 const mapDispatchToProps = {
   queryPopularBook,
   queryHotBooks,
+  queryRelevanceBooks,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListBook)

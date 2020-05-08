@@ -9,6 +9,8 @@ import {
 import { watchQueryListSubjects } from './subject.saga'
 import { watchQueryBookDetail } from './bookDetail.saga'
 import { watchQueryGetRatingBook, watchQueryPostRatingBook } from './rating-book.saga'
+import { watchQueryRelevanceBooks } from './relevanceBooks.saga'
+import { watchQueryBooksSameAuthors } from './booksSameAuthors.saga'
 
 export default function* rootSaga() {
   yield all([
@@ -20,5 +22,7 @@ export default function* rootSaga() {
     watchQueryBookDetail(),
     watchQueryGetRatingBook(),
     watchQueryPostRatingBook(),
+    watchQueryRelevanceBooks(),
+    watchQueryBooksSameAuthors(),
   ])
 }
