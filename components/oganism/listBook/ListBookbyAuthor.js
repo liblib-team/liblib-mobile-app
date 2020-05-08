@@ -16,7 +16,6 @@ class ListBookbyAuthor extends React.Component {
   }
   render() {
     const books = this.props.booksSameAuthors
-    console.log(books)
     return (
       <View>
         <SafeAreaView style={styles.container}>
