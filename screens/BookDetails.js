@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ScrollView, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { Body, Card, CardItem } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
 import Review from '../components/molecules/review/Review'
 import Colors from '../constants/Colors'
@@ -11,6 +12,7 @@ import ReviewDialog from '../components/molecules/review/ReviewDialog'
 
 export default BookDetails = ({ route }) => {
   const id = route.params.id
+  const navigator = useNavigation()
   const [visibleDiaglog, setVisibleDialog] = useState(false)
   const showDialog = () => {
     setVisibleDialog(true)
