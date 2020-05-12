@@ -10,6 +10,7 @@ import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
 import ChangePassword from '../screens/ChangePassword'
 import Collections from '../components/molecules/collections/Collections'
+import PDFView from '../screens/PDFView'
 
 const Stack = createStackNavigator()
 
@@ -31,6 +32,7 @@ export default Routes = () => {
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="Collections" component={Collections} />
+      <Stack.Screen name="PDFView" component={PDFView} options={optionsHeader} />
     </Stack.Navigator>
   )
 }
