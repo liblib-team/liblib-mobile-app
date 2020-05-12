@@ -1,12 +1,14 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { Card, Button, Icon } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
 import CustomImage from '../../atoms/CustomImage'
 import Colors from '../../../constants/Colors'
 import Layout from '../../../constants/Layout'
 
 export default BookSaved = (props) => {
+  const navigator = useNavigation()
   const { id, img, title, author, description } = props
   return (
     <View style={styles.container}>
@@ -26,7 +28,12 @@ export default BookSaved = (props) => {
               {description}
             </Text>
           </View>
-          <Button iconLeft small style={styles.button}>
+          <Button
+            iconLeft
+            small
+            style={styles.button}
+            onPress={() => navigator.navigate('PDFView', { title: title })}
+          >
             <Text style={styles.textButton}>Đọc sách</Text>
           </Button>
         </View>
