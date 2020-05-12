@@ -5,8 +5,8 @@ import { Card, Icon } from 'native-base'
 import CustomImage from '../../atoms/CustomImage'
 import Colors from '../../../constants/Colors'
 
-export default BookBrowed = (props) => {
-  const { id, img, name, borowTime, returnTime, timeRemaining, status } = props
+export default BookReserved = (props) => {
+  const { id, img, name, borowTime, returnTime, status } = props
   return (
     <View>
       <Card style={styles.container}>
@@ -16,10 +16,8 @@ export default BookBrowed = (props) => {
           </View>
           <View>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.detail}>Ngày mượn: {borowTime}</Text>
-            <Text style={styles.detail}>Ngày trả: {returnTime}</Text>
-            <Text style={styles.detail}>Số ngày còn lại: {timeRemaining} ngày</Text>
-
+            <Text style={styles.detail}>Ngày đặt: {borowTime}</Text>
+            <Text style={styles.detail}>Hạn lấy: {returnTime}</Text>
             <Text style={styles.detail}>Trạng thái: {status}</Text>
           </View>
         </View>

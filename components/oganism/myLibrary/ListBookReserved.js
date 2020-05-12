@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { StyleSheet, SafeAreaView, ScrollView, View, Text, FlatList } from 'react-native'
-import { DatePicker, Card, Icon } from 'native-base'
 
 import Colors from '../../../constants/Colors'
-import BookBrowed from '../../molecules/books/BookBrowed'
-export default ListBookBrowed = (props) => {
+import BookReserved from '../../molecules/books/BookReserved'
+export default ListBookRevered = (props) => {
   const books = [
     {
       id: '1',
@@ -49,26 +48,13 @@ export default ListBookBrowed = (props) => {
   ]
   return (
     <ScrollView>
-      <Card style={styles.date}>
-        <Text style={styles.text}>Từ ngày:</Text>
-        <DatePicker
-          textStyle={{ color: Colors.tintColor }}
-          defaultDate={new Date(2018, 4, 4)}
-        ></DatePicker>
-        <Text style={styles.text}>Đến ngày:</Text>
-        <DatePicker
-          textStyle={{ color: Colors.tintColor }}
-          defaultDate={new Date(2018, 4, 4)}
-        ></DatePicker>
-
-        <Icon name="search" style={styles.iconSearch} />
-      </Card>
+      <Text style={styles.filter}>Vui lòng lấy sách trước ngày hẹn!</Text>
       <SafeAreaView style={styles.container}>
         <FlatList
           vertical
           data={books}
           renderItem={({ item }) => (
-            <BookBrowed
+            <BookReserved
               id={item.id}
               img={item.uri}
               name={item.name}
@@ -104,11 +90,20 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: Colors.white,
   },
   iconSearch: {
     fontSize: 25,
     alignSelf: 'center',
     marginRight: 5,
+  },
+  filter: {
+    fontSize: 16,
+    marginHorizontal: 10,
+    height: 30,
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
   },
 })
