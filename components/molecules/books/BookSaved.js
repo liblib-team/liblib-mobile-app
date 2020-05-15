@@ -9,36 +9,41 @@ import Layout from '../../../constants/Layout'
 
 export default BookSaved = (props) => {
   const navigator = useNavigation()
-  const { id, img, title, author, description } = props
+  const { id, img, title, authors, description } = props
+  const onGoToBookDetails = (title, id) => {
+    navigator.navigate('BookDetails', { title: title, id: id })
+  }
   return (
-    <View style={styles.container}>
-      <Card style={[styles.inLine, { marginTop: 5 }]}>
-        <CustomImage img={img} />
-        <View style={styles.inCol}>
-          <View>
+    <TouchableOpacity onPress={() => onGoToBookDetails(title, id)}>
+      <View style={styles.container}>
+        <Card style={[styles.inLine, { marginTop: 5 }]}>
+          <CustomImage img={img} />
+          <View style={styles.inCol}>
+            <View>
+              <View style={styles.customTitle}>
+                <Text style={styles.title} numberOfLines={5}>
+                  {title}
+                </Text>
+              </View>
+              <Text style={styles.author}>{authors}</Text>
+            </View>
             <View style={styles.customTitle}>
-              <Text style={styles.title} numberOfLines={5}>
-                {title}
+              <Text style={styles.description} numberOfLines={5} ellipsizeMode="head">
+                {description}
               </Text>
             </View>
-            <Text style={styles.author}>{author}</Text>
+            <Button
+              iconLeft
+              small
+              style={styles.button}
+              onPress={() => navigator.navigate('PDFView', { title: title, id: id })}
+            >
+              <Text style={styles.textButton}>Đọc sách</Text>
+            </Button>
           </View>
-          <View style={styles.customTitle}>
-            <Text style={styles.description} numberOfLines={5} ellipsizeMode="head">
-              {description}
-            </Text>
-          </View>
-          <Button
-            iconLeft
-            small
-            style={styles.button}
-            onPress={() => navigator.navigate('PDFView', { title: title })}
-          >
-            <Text style={styles.textButton}>Đọc sách</Text>
-          </Button>
-        </View>
-      </Card>
-    </View>
+        </Card>
+      </View>
+    </TouchableOpacity>
   )
 }
 

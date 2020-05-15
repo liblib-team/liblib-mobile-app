@@ -1,6 +1,7 @@
 import React from 'react'
+import { AsyncStorage } from 'react-native'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import { Button, Icon, Card, Right } from 'native-base'
+import { Button, Icon, Card, Right, Toast } from 'native-base'
 import { Rating } from 'react-native-ratings'
 import { queryBookDetail } from '../../../redux-saga/actions/book.actions'
 import { connect } from 'react-redux'
@@ -20,6 +21,28 @@ class BookInfo extends React.Component {
       isShowMoreInfo: !prevState.isShowMoreInfo,
     }))
   }
+  saveToFavorite = async () => {
+    try {
+      let favoriteBooks = JSON.parse(await AsyncStorage.getItem('favoriteBooks'))
+      const book = this.props.bookDetail
+      if (favoriteBooks == null) {
+        favoriteBooks = []
+      }
+      favoriteBooks.push(book)
+      await AsyncStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
+
+      Toast.show({
+        type: 'success',
+        text: 'Lưu sách thành công! Vui lòng vào mục yêu thích để đọc sách!',
+      })
+    } catch (error) {
+      console.log(error)
+      Toast.show({
+        type: 'danger',
+        text: 'Lưu sách không thành công',
+      })
+    }
+  }
   componentDidMount() {
     const { id } = this.props
     this.props.queryBookDetail(id)
@@ -30,7 +53,6 @@ class BookInfo extends React.Component {
     }
   }
 
-  
   render() {
     const { isShowMoreInfo } = this.state
     const book = this.props.bookDetail
@@ -55,7 +77,7 @@ class BookInfo extends React.Component {
                 <Text style={styles.author}>{book.point}</Text>
               </View>
 
-              <Button iconLeft small style={styles.button}>
+              <Button iconLeft small style={styles.button} onPress={this.saveToFavorite}>
                 <Text style={styles.textButton}>Lưu sách</Text>
               </Button>
               <Button iconLeft small style={styles.button}>
