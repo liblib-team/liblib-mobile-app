@@ -28,6 +28,12 @@ class ListBook extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.props.queryRelevanceBooks(this.props.id)
+    }
+  }
+
   render() {
     let books = []
     const title = this.props.filterName

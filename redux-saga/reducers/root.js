@@ -8,6 +8,8 @@ import { popularBooksReducer } from './popularBooks.reducer'
 import { ratingBookReducer, postRatingBookReducer } from './rating-book.reducer'
 import { relevanceBooksReducer } from './relevanceBooks.reducer'
 import { booksSameAuthorsReducer } from './booksSameAuthors.reducer'
+import { listReverationsReducer } from './listReverations.reducer'
+import { listBorrowedReducer } from './listBorrowed.reducer'
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -20,6 +22,8 @@ const reducer = combineReducers({
   reviewBook: postRatingBookReducer,
   relevanceBooks: relevanceBooksReducer,
   booksSameAuthors: booksSameAuthorsReducer,
+  listReverations: listReverationsReducer,
+  listBorrowed: listBorrowedReducer,
 })
 
 export default reducer

@@ -14,6 +14,11 @@ class ListBookbyAuthor extends React.Component {
     const { id } = this.props
     this.props.queryBooksSameAuthors(id)
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.props.queryBooksSameAuthors(this.props.id)
+    }
+  }
   render() {
     const books = this.props.booksSameAuthors
     return (

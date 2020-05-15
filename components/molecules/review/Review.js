@@ -18,6 +18,11 @@ class Review extends React.Component {
     const { id } = this.props
     this.props.queryGetRatingBook(id)
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.props.queryGetRatingBook(this.props.id)
+    }
+  }
   render() {
     listRatingBook = this.props.listRatingBook
     return (

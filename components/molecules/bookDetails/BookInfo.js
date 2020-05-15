@@ -25,11 +25,12 @@ class BookInfo extends React.Component {
     this.props.queryBookDetail(id)
   }
   componentDidUpdate(prevProps) {
-    console.log(this.props.id)
     if (this.props.id !== prevProps.id) {
       this.props.queryBookDetail(this.props.id)
     }
   }
+
+  
   render() {
     const { isShowMoreInfo } = this.state
     const book = this.props.bookDetail

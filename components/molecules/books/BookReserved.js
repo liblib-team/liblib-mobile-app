@@ -15,7 +15,9 @@ export default BookReserved = (props) => {
             <CustomImage img={img} />
           </View>
           <View>
-            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.name} numberOfLines={3}>
+              {name}
+            </Text>
             <Text style={styles.detail}>Ngày đặt: {borowTime}</Text>
             <Text style={styles.detail}>Hạn lấy: {returnTime}</Text>
             <Text style={styles.detail}>Trạng thái: {status}</Text>

@@ -9,7 +9,7 @@ import Layout from '../../../constants/Layout'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default BookbyAuthor = (props) => {
-  const { title, authors, img, description } = props
+  const {id, title, authors, img, description } = props
   const navigator = useNavigation()
 
   const onGoToBookDetails = (title, id) => {

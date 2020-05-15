@@ -46,7 +46,8 @@ const queryPostRatingBook = (review) => {
 function* doQueryPostRatingBook(request) {
   try {
     const { message } = yield call(queryPostRatingBook, request.review)
-    yield put({ type: request.response.success, review: { ...request.data } })
+    yield put({ type: request.response.success })
+    console.log(request.response.success.success)
     Toast.show({
       text: 'Bình luận thành công',
       type: 'success',

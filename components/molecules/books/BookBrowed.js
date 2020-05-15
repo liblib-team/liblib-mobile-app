@@ -15,7 +15,9 @@ export default BookBrowed = (props) => {
             <CustomImage img={img} />
           </View>
           <View>
-            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.name} numberOfLines={3}>
+              {name}
+            </Text>
             <Text style={styles.detail}>Ngày mượn: {borowTime}</Text>
             <Text style={styles.detail}>Ngày trả: {returnTime}</Text>
             <Text style={styles.detail}>Số ngày còn lại: {timeRemaining} ngày</Text>

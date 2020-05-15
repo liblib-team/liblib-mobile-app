@@ -1,40 +1,48 @@
 import * as React from 'react'
 import { StyleSheet, SafeAreaView, ScrollView, View, Text, FlatList } from 'react-native'
+import { DatePicker, Card, Icon } from 'native-base'
 import { connect } from 'react-redux'
+import { queryListBorrowed } from '../../../redux-saga/actions/listBorrowed.action'
 
-import { queryListReverations } from '../../../redux-saga/actions/listReservations.actions'
 import Colors from '../../../constants/Colors'
-import BookReserved from '../../molecules/books/BookReserved'
+import BookBrowed from '../../molecules/books/BookBrowed'
 
-class ListBookRevered extends React.Component {
+class ListBookBorrowed extends React.Component {
   constructor(props) {
     super(props)
   }
   componentDidMount() {
-    this.props.queryListReverations()
+    this.props.queryListBorrowed()
   }
   convertTime = (time) => {
     return new Date(time * 1000).toLocaleDateString('en-GB')
   }
   render() {
-    const books = this.props.listReverations
-
+    const books = this.props.listBookBorrowed
     return (
       <ScrollView>
-        <Text style={styles.filter}>Vui lòng lấy sách trước ngày hẹn!</Text>
+        <Card style={styles.date}>
+          <Text style={styles.text}>Từ ngày:</Text>
+          <DatePicker textStyle={{ color: Colors.tintColor }}></DatePicker>
+          <Text style={styles.text}>Đến ngày:</Text>
+          <DatePicker textStyle={{ color: Colors.tintColor }}></DatePicker>
+
+          <Icon name="search" style={styles.iconSearch} />
+        </Card>
+
         <SafeAreaView style={styles.container}>
           <FlatList
             vertical
             data={books}
             renderItem={({ item }) => (
-              <BookReserved
+              <BookBrowed
                 id={item.bookId}
                 img={item.image}
                 name={item.title}
-                borowTime={this.convertTime(item.reservationDate)}
-                returnTime={this.convertTime(item.reservationDate + 60 * 60 * 24 * 3)}
-                timeRemaining={item.timeRemaining}
                 status={item.status}
+                borowTime={this.convertTime(item.borrowedDate)}
+                returnTime={this.convertTime(item.dueDate)}
+                timeRemaining={(item.dueDate - item.borrowedDate) / (60 * 60 * 24)}
               />
             )}
             keyExtractor={(item) => item.id}
@@ -83,12 +91,11 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  listReverations: state.listReverations,
-  auth: state.auth,
+  listBookBorrowed: state.listBorrowed,
 })
 
 const mapDispatchToProps = {
-  queryListReverations,
+  queryListBorrowed,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListBookRevered)
+export default connect(mapStateToProps, mapDispatchToProps)(ListBookBorrowed)

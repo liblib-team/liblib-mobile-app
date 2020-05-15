@@ -16,7 +16,7 @@ export const queryGetRatingBook = (id) => ({
 
 export const queryPostRatingBook = (review) => ({
   type: POST_RATING_BOOK,
-  responese: {
+  response: {
     success: POST_RATING_BOOK_SUCCESS,
     failed: POST_RATING_BOOK_FAILED,
   },

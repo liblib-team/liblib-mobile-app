@@ -2,7 +2,7 @@ import * as React from 'react'
 import { StyleSheet, Text, ScrollView } from 'react-native'
 import { Tab, Tabs } from 'native-base'
 
-import ListBookBrowed from '../components/oganism/myLibrary/ListBookBrowed'
+import ListBookBorrowed from '../components/oganism/myLibrary/ListBookBorrowed'
 import Colors from '../constants/Colors'
 import ListBookRevered from '../components/oganism/myLibrary/ListBookReserved'
 
@@ -21,7 +21,7 @@ export default function MyLibrary() {
         tabStyle={{ backgroundColor: Colors.tintColor }}
         activeTabStyle={{ backgroundColor: Colors.tintColor }}
       >
-        <ListBookBrowed />
+        <ListBookBorrowed />
       </Tab>
     </Tabs>
   )

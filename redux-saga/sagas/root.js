@@ -11,6 +11,8 @@ import { watchQueryBookDetail } from './bookDetail.saga'
 import { watchQueryGetRatingBook, watchQueryPostRatingBook } from './rating-book.saga'
 import { watchQueryRelevanceBooks } from './relevanceBooks.saga'
 import { watchQueryBooksSameAuthors } from './booksSameAuthors.saga'
+import { watchQueryListReverations } from './listReverations.saga'
+import { watchQueryListBorrowed } from './listBorrowed.saga'
 
 export default function* rootSaga() {
   yield all([
@@ -24,5 +26,7 @@ export default function* rootSaga() {
     watchQueryPostRatingBook(),
     watchQueryRelevanceBooks(),
     watchQueryBooksSameAuthors(),
+    watchQueryListReverations(),
+    watchQueryListBorrowed(),
   ])
 }
