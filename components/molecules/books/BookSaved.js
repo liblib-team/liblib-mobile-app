@@ -13,6 +13,7 @@ export default BookSaved = (props) => {
   const onGoToBookDetails = (title, id) => {
     navigator.navigate('BookDetails', { title: title, id: id })
   }
+
   return (
     <TouchableOpacity onPress={() => onGoToBookDetails(title, id)}>
       <View style={styles.container}>

@@ -25,7 +25,7 @@ class ReviewDialog extends React.Component {
 
   onRate = () => {
     const reviewBook = {}
-    reviewBook.id = this.props.id
+    reviewBook.bookId = this.props.id
     reviewBook.point = this.state.rating
     reviewBook.comment = this.state.comment
     this.props.queryPostRatingBook(reviewBook)

@@ -19,15 +19,12 @@ export const ratingBookReducer = (state = [], action) => {
   }
 }
 
-export const postRatingBookReducer = (state = review, action) => {
+export const postRatingBookReducer = (state = {}, action) => {
   switch (action.type) {
     case POST_RATING_BOOK_SUCCESS:
-      return {
-        ...state,
-      }
+      return {...action.data}
     case POST_RATING_BOOK_FAILED:
       return {
-        ...state,
         error: action.data,
       }
     default:

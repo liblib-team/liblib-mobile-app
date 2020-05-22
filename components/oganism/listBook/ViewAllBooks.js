@@ -37,6 +37,9 @@ class ViewAllBooks extends Component {
     if (this.props.popularBooks !== nextProps.popularBooks) {
       return true
     }
+    if (this.props.booksBySubject !== nextProps.booksBySubject) {
+      return true
+    }
     return false
   }
 
