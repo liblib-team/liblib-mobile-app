@@ -1,21 +1,24 @@
-import * as React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { Card, Button, Icon } from 'native-base'
-import { useNavigation } from '@react-navigation/native'
+import * as React from "react";
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
+import { Card, Button, Icon } from "native-base";
+import { useNavigation } from "@react-navigation/native";
 
-import CustomImage from '../../atoms/CustomImage'
-import Colors from '../../../constants/Colors'
-import Layout from '../../../constants/Layout'
+import CustomImage from "../../atoms/CustomImage";
+import Colors from "../../../constants/Colors";
+import Layout from "../../../constants/Layout";
 
 export default BookSaved = (props) => {
-  const navigator = useNavigation()
-  const { id, img, title, authors, description } = props
+  const navigator = useNavigation();
+  const { id, img, title, authors, description, removeBook } = props;
   const onGoToBookDetails = (title, id) => {
-    navigator.navigate('BookDetails', { title: title, id: id })
-  }
+    navigator.navigate("BookDetails", { title: title, id: id });
+  };
 
   return (
-    <TouchableOpacity onPress={() => onGoToBookDetails(title, id)}>
+    <TouchableOpacity
+      onPress={() => onGoToBookDetails(title, id)}
+      onLongPress={() => removeBook(id)}
+    >
       <View style={styles.container}>
         <Card style={[styles.inLine, { marginTop: 5 }]}>
           <CustomImage img={img} />
@@ -29,7 +32,11 @@ export default BookSaved = (props) => {
               <Text style={styles.author}>{authors}</Text>
             </View>
             <View style={styles.customTitle}>
-              <Text style={styles.description} numberOfLines={5} ellipsizeMode="head">
+              <Text
+                style={styles.description}
+                numberOfLines={5}
+                ellipsizeMode="head"
+              >
                 {description}
               </Text>
             </View>
@@ -37,7 +44,9 @@ export default BookSaved = (props) => {
               iconLeft
               small
               style={styles.button}
-              onPress={() => navigator.navigate('PDFView', { title: title, id: id })}
+              onPress={() =>
+                navigator.navigate("PDFView", { title: title, id: id })
+              }
             >
               <Text style={styles.textButton}>Đọc sách</Text>
             </Button>
@@ -45,33 +54,33 @@ export default BookSaved = (props) => {
         </Card>
       </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
   },
   inLine: {
-    flexDirection: 'row',
+    flexDirection: "row",
     width: Layout.window.width - 20,
-    alignSelf: 'center',
+    alignSelf: "center",
     borderRadius: 5,
     paddingTop: 5,
     paddingBottom: 5,
-    justifyContent: 'space-around',
+    justifyContent: "space-around",
   },
   inCol: {
-    flexDirection: 'column',
-    justifyContent: 'space-around',
+    flexDirection: "column",
+    justifyContent: "space-around",
   },
   customTitle: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   title: {
     fontSize: 16,
     marginHorizontal: 5,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     width: 0,
     flexGrow: 1,
     flex: 1,
@@ -88,7 +97,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 140,
-    justifyContent: 'space-around',
+    justifyContent: "space-around",
     backgroundColor: Colors.pink,
     marginTop: 10,
     borderRadius: 5,
@@ -96,12 +105,12 @@ const styles = StyleSheet.create({
   textButton: {
     color: Colors.white,
     fontSize: 16,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   review: {
     marginLeft: 10,
     marginRight: 10,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   icon: {
     color: Colors.tintColor,
@@ -117,4 +126,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingBottom: 5,
   },
-})
+});

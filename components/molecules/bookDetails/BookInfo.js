@@ -5,9 +5,11 @@ import { Button, Icon, Card, Right, Toast } from 'native-base'
 import { Rating } from 'react-native-ratings'
 import { queryBookDetail } from '../../../redux-saga/actions/book.actions'
 import { connect } from 'react-redux'
+import store from '../../../store'
 
 import Layout from '../../../constants/Layout'
 import Colors from '../../../constants/Colors'
+import { getHeaders, SERVER_URL } from '../../../auth'
 
 class BookInfo extends React.Component {
   constructor(props) {
@@ -23,13 +25,14 @@ class BookInfo extends React.Component {
   }
   saveToFavorite = async () => {
     try {
-      let favoriteBooks = JSON.parse(await AsyncStorage.getItem('favoriteBooks'))
+      const username = store.getState().auth.username
+      let favoriteBooks = JSON.parse(await AsyncStorage.getItem('favoriteBooks' + username))
       const book = this.props.bookDetail
       if (favoriteBooks == null) {
         favoriteBooks = []
       }
       favoriteBooks.push(book)
-      await AsyncStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
+      await AsyncStorage.setItem('favoriteBooks' + username, JSON.stringify(favoriteBooks))
 
       Toast.show({
         type: 'success',
@@ -43,6 +46,31 @@ class BookInfo extends React.Component {
       })
     }
   }
+
+  orderBook = (id) => {
+    fetch(SERVER_URL + 'reservation/create/' +  id, {
+      headers: getHeaders(true),
+      method: 'POST',
+    })
+      .then((response) => {
+        response.json()
+        if(response.json.success == true) {
+          Toast.show({
+          Text: "Đặt sách thành công, vui lòng vào thư viện của bạn để theo dõi sách",
+          type: 'success'
+        })
+        } else if (response.json.success == false){
+          Toast.show({
+            Text: "Đặt sách thất bại! Sách đã hết trong kho",
+            type: 'danger'
+          })
+        }
+        
+      })
+      .catch((error) => reject(error))
+
+  }
+  
   componentDidMount() {
     const { id } = this.props
     this.props.queryBookDetail(id)
@@ -55,6 +83,7 @@ class BookInfo extends React.Component {
 
   render() {
     const { isShowMoreInfo } = this.state
+    const { id } = this.props
     const book = this.props.bookDetail
     return (
       <View>
@@ -80,7 +109,7 @@ class BookInfo extends React.Component {
               <Button iconLeft small style={styles.button} onPress={this.saveToFavorite}>
                 <Text style={styles.textButton}>Lưu sách</Text>
               </Button>
-              <Button iconLeft small style={styles.button}>
+              <Button iconLeft small style={styles.button} onPress={this.orderBook(id)}>
                 <Text style={styles.textButton}>Mượn sách</Text>
               </Button>
             </View>

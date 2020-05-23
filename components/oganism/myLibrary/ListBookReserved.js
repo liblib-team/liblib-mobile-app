@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, SafeAreaView, ScrollView, View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
+import { SERVER_URL, getHeaders} from '../../../auth'
 
 import { queryListReverations } from '../../../redux-saga/actions/listReservations.actions'
 import Colors from '../../../constants/Colors'
@@ -16,6 +17,16 @@ class ListBookRevered extends React.Component {
   convertTime = (time) => {
     return new Date(time * 1000).toLocaleDateString('en-GB')
   }
+  removeOrderBook = (id) => {
+    fetch(SERVER_URL + 'reservation/cancel/' + id, {
+      headers: getHeaders(true),
+      method: 'POST',
+    })
+      .then((response) => {
+        console.log(response.json())
+      })
+      .catch((error) => {reject(error); console.log(error)})
+  }
   render() {
     const books = this.props.listReverations
 
@@ -28,6 +39,7 @@ class ListBookRevered extends React.Component {
             data={books}
             renderItem={({ item }) => (
               <BookReserved
+                reservationId = {item.id}
                 id={item.bookId}
                 img={item.image}
                 name={item.title}
@@ -35,6 +47,7 @@ class ListBookRevered extends React.Component {
                 returnTime={this.convertTime(item.reservationDate + 60 * 60 * 24 * 3)}
                 timeRemaining={item.timeRemaining}
                 status={item.status}
+                removeOrderBook={() => this.removeOrderBook(item.id)}
               />
             )}
             keyExtractor={(item) => item.id}
