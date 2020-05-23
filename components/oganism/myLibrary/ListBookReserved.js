@@ -1,34 +1,73 @@
-import * as React from 'react'
-import { StyleSheet, SafeAreaView, ScrollView, View, Text, FlatList } from 'react-native'
-import { connect } from 'react-redux'
-import { SERVER_URL, getHeaders} from '../../../auth'
+import * as React from "react";
+import {
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  FlatList,
+  Alert,
+} from "react-native";
+import { connect } from "react-redux";
+import { SERVER_URL, getHeaders } from "../../../auth";
 
-import { queryListReverations } from '../../../redux-saga/actions/listReservations.actions'
-import Colors from '../../../constants/Colors'
-import BookReserved from '../../molecules/books/BookReserved'
+import { queryListReverations } from "../../../redux-saga/actions/listReservations.actions";
+import Colors from "../../../constants/Colors";
+import BookReserved from "../../molecules/books/BookReserved";
+import { Toast } from "native-base";
 
 class ListBookRevered extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   componentDidMount() {
     this.props.queryListReverations()
   }
   convertTime = (time) => {
-    return new Date(time * 1000).toLocaleDateString('en-GB')
-  }
-  removeOrderBook = (id) => {
-    fetch(SERVER_URL + 'reservation/cancel/' + id, {
-      headers: getHeaders(true),
-      method: 'POST',
-    })
-      .then((response) => {
-        console.log(response.json())
-      })
-      .catch((error) => {reject(error); console.log(error)})
-  }
+    return new Date(time * 1000).toLocaleDateString("en-GB")
+  };
+  removeOrderBook = async (id) => {
+    Alert.alert(
+      "Hủy yêu cầu đặt sách",
+      "Bạn chắc chắn muốn hủy yêu cầu đặt trước sách này!",
+      [
+        {
+          text: "Hủy",
+          style: "cancel",
+        },
+        {
+          text: "Xóa",
+          onPress: () => {
+            return fetch(SERVER_URL + "reservation/cancel/" + id, {
+              headers: getHeaders(true),
+              method: "POST",
+            })
+              .then((response) => response.json())
+              .then((json) => {
+                if (json.success == true) {
+                  Toast.show({
+                    type: "success",
+                    text: "Hủy yêu cầu đặt sách thành công",
+                  });
+                  this.props.queryListReverations()
+                } else if (json.success == false) {
+                  Toast.show({
+                    type: "danger",
+                    text: json.message,
+                  });
+                }
+              })
+              .catch((error) => {
+                console.error(error)
+              })
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
   render() {
-    const books = this.props.listReverations
+    const books = this.props.listReverations;
 
     return (
       <ScrollView>
@@ -39,12 +78,14 @@ class ListBookRevered extends React.Component {
             data={books}
             renderItem={({ item }) => (
               <BookReserved
-                reservationId = {item.id}
+                reservationId={item.id}
                 id={item.bookId}
                 img={item.image}
                 name={item.title}
                 borowTime={this.convertTime(item.reservationDate)}
-                returnTime={this.convertTime(item.reservationDate + 60 * 60 * 24 * 3)}
+                returnTime={this.convertTime(
+                  item.reservationDate + 60 * 60 * 24 * 3
+                )}
                 timeRemaining={item.timeRemaining}
                 status={item.status}
                 removeOrderBook={() => this.removeOrderBook(item.id)}
@@ -54,7 +95,7 @@ class ListBookRevered extends React.Component {
           />
         </SafeAreaView>
       </ScrollView>
-    )
+    );
   }
 }
 
@@ -63,16 +104,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   date: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     borderRadius: 5,
     padding: 5,
     marginRight: 10,
     marginLeft: 10,
   },
   text: {
-    alignSelf: 'center',
-    textAlignVertical: 'center',
+    alignSelf: "center",
+    textAlignVertical: "center",
     fontSize: 15,
   },
   container: {
@@ -81,7 +122,7 @@ const styles = StyleSheet.create({
   },
   iconSearch: {
     fontSize: 25,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginRight: 5,
   },
   filter: {
@@ -89,19 +130,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: 30,
     marginTop: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: 'bold',
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "bold",
   },
-})
+});
 
 const mapStateToProps = (state) => ({
   listReverations: state.listReverations,
   auth: state.auth,
-})
+});
 
 const mapDispatchToProps = {
   queryListReverations,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListBookRevered)
+export default connect(mapStateToProps, mapDispatchToProps)(ListBookRevered);

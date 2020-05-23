@@ -48,27 +48,27 @@ class BookInfo extends React.Component {
   }
 
   orderBook = (id) => {
-    fetch(SERVER_URL + 'reservation/create/' +  id, {
+    return fetch(SERVER_URL + 'reservation/create/' +  id, {
       headers: getHeaders(true),
       method: 'POST',
     })
-      .then((response) => {
-        response.json()
-        if(response.json.success == true) {
-          Toast.show({
-          Text: "Đặt sách thành công, vui lòng vào thư viện của bạn để theo dõi sách",
-          type: 'success'
-        })
-        } else if (response.json.success == false){
-          Toast.show({
-            Text: "Đặt sách thất bại! Sách đã hết trong kho",
-            type: 'danger'
-          })
-        }
-        
-      })
-      .catch((error) => reject(error))
-
+    .then((response) => response.json())
+    .then((json) => {
+      if (json.success == true) {
+        Toast.show({
+          type: "success",
+          text: "Yêu cầu đặt sách thành công",
+        });
+      } else if (json.success == false) {
+        Toast.show({
+          type: "danger",
+          text: json.message,
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    })
   }
   
   componentDidMount() {
@@ -109,7 +109,7 @@ class BookInfo extends React.Component {
               <Button iconLeft small style={styles.button} onPress={this.saveToFavorite}>
                 <Text style={styles.textButton}>Lưu sách</Text>
               </Button>
-              <Button iconLeft small style={styles.button} onPress={this.orderBook(id)}>
+              <Button iconLeft small style={styles.button} onPress={() => this.orderBook(id)}>
                 <Text style={styles.textButton}>Mượn sách</Text>
               </Button>
             </View>
