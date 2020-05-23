@@ -15,9 +15,12 @@ export default BookBrowed = (props) => {
             <CustomImage img={img} />
           </View>
           <View>
-            <Text style={styles.name} numberOfLines={3}>
+            <View style={styles.title}>
+              <Text style={styles.name} numberOfLines={3}>
               {name}
             </Text>
+            </View>
+            
             <Text style={styles.detail}>Ngày mượn: {borowTime}</Text>
             <Text style={styles.detail}>Ngày trả: {returnTime}</Text>
             <Text style={styles.detail}>Số ngày còn lại: {timeRemaining} ngày</Text>
@@ -42,6 +45,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
+  title: {
+    flexDirection: 'row'
+  },
   content: {
     flexDirection: 'row',
   },
@@ -51,6 +57,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginStart: 5,
     fontWeight: 'bold',
+    flexGrow: 1,
+    flex: 1,
   },
   detail: {
     fontSize: 13,
