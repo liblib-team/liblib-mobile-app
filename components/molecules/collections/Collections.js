@@ -30,7 +30,7 @@ class Collection extends React.Component {
     let Subjects = []
     Subjects = this.props.listSubjects
     return (
-      <View>
+      <View style={styles.container}>
         {Subjects.length > 0 && (
           <List
             horizontal
@@ -62,6 +62,9 @@ class Collection extends React.Component {
   }
 }
 const styles = StyleSheet.create({
+  container: {
+    marginRight: 10
+  },
   card: {
     borderRadius: 5,
     height: 80,

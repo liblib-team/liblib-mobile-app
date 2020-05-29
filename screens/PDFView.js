@@ -26,13 +26,14 @@ export default class PDFView extends React.Component {
     const { haveError } = this.state;
     return !haveError ? (
         <PDFReader
+        withPinchZoom={true}
         withScroll={true}
         source={{
           uri: 'http://blueto0th.ddns.net:5000/api/book/read/' + id,
         }}
       />
       ) : (
-          <Text style={styles.filter}>Sách này hiện tại chưa có bản pdf! Vui lòng đến thư viện để mượn sách!</Text>
+          <Text style={styles.filter}>Sách này hiện tại chưa có bản pdf!</Text>
       )
   }
 }

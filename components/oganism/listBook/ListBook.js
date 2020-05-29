@@ -72,6 +72,7 @@ class ListBook extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+    marginRight: 10,
   },
 })
 
