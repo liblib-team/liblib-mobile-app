@@ -1,39 +1,46 @@
 import * as React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Card } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
 import CustomImage from '../../atoms/CustomImage'
 import Colors from '../../../constants/Colors'
 import Layout from '../../../constants/Layout'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default BookbyAuthor = (props) => {
-  const { title, author, img } = props
-  return (
-    <View style={styles.container}>
-      <Card style={styles.inLine}>
-        <View style={styles.img}>
-          <CustomImage img={img} style={styles.imgCustom} />
-        </View>
+  const {id, title, authors, img, description } = props
+  const navigator = useNavigation()
 
-        <View style={styles.inCol}>
-          <View>
+  const onGoToBookDetails = (title, id) => {
+    navigator.navigate('BookDetails', { title: title, id: id })
+  }
+  return (
+    <TouchableOpacity onPress={() => onGoToBookDetails(title, id)}>
+      <View style={styles.container}>
+        <Card style={styles.inLine}>
+          <View style={styles.img}>
+            <CustomImage img={img} style={styles.imgCustom} />
+          </View>
+
+          <View style={styles.inCol}>
+            <View>
+              <View style={styles.customTitle}>
+                <Text style={styles.title} numberOfLines={3} ellipsizeMode="head">
+                  {title}
+                </Text>
+              </View>
+              <Text style={styles.author}>{authors}</Text>
+            </View>
             <View style={styles.customTitle}>
-              <Text style={styles.title} numberOfLines={3} ellipsizeMode="head">
-                {title}
+              <Text style={styles.description} numberOfLines={5} ellipsizeMode="head">
+                {description}
               </Text>
             </View>
-            <Text style={styles.author}>{author}</Text>
           </View>
-          <View style={styles.customTitle}>
-            <Text style={styles.description} numberOfLines={5} ellipsizeMode="head">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the
-              1500s.
-            </Text>
-          </View>
-        </View>
-      </Card>
-    </View>
+        </Card>
+      </View>
+    </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({

@@ -12,6 +12,8 @@ import useLinking from './navigation/useLinking'
 import Routes from './navigation/Routes'
 import store from './store'
 import { Root } from 'native-base'
+import { getCurrentUser, setCurrentUser, removeCurrentUser } from './auth'
+import { LOGIN_SUCCESS } from './redux-saga/actions/action-type'
 
 const Stack = createStackNavigator()
 
@@ -35,6 +37,14 @@ export default function App(props) {
           ...Ionicons.font,
           'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
         })
+        // Auto login if current user is exist
+        const currentUser = await getCurrentUser()
+        if (currentUser) {
+          store.dispatch({
+            type: LOGIN_SUCCESS,
+            data: { username: currentUser.username, jwt: currentUser.jwt },
+          })
+        }
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e)

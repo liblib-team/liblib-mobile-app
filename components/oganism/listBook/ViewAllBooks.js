@@ -10,6 +10,7 @@ import {
   queryBooksBySubject,
 } from '../../../redux-saga/actions/book.actions'
 import { LIST_BOOK_TITLE } from '../../../constants/Type'
+import store from '../../../store'
 
 class ViewAllBooks extends Component {
   constructor(props) {
@@ -36,6 +37,9 @@ class ViewAllBooks extends Component {
     if (this.props.popularBooks !== nextProps.popularBooks) {
       return true
     }
+    if (this.props.booksBySubject !== nextProps.booksBySubject) {
+      return true
+    }
     return false
   }
 
@@ -58,6 +62,7 @@ class ViewAllBooks extends Component {
               data={books}
               renderItem={({ item }) => (
                 <BookItem
+                  id={item.id}
                   img={item.image}
                   title={item.title}
                   authors={item.authors.map((author) => author.name).join(', ')}

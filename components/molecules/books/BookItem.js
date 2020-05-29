@@ -11,12 +11,12 @@ export default BookItem = (props) => {
   const { id, img, title, authors } = props
   const navigator = useNavigation()
 
-  const onGoToBookDetails = (title) => {
-    navigator.navigate('BookDetails', { title: title })
+  const onGoToBookDetails = (title, id) => {
+    navigator.navigate('BookDetails', { title: title, id: id })
   }
 
   return (
-    <TouchableOpacity onPress={() => onGoToBookDetails(title)}>
+    <TouchableOpacity onPress={() => onGoToBookDetails(title, id)}>
       <Card style={styles.container}>
         <CustomImage img={img} />
         <Text style={styles.title} numberOfLines={2}>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     justifyContent: 'center',
     width: Layout.window.width * 0.4 + 20,
-    height: Layout.window.height * 0.4,
+    height: Layout.window.height * 0.4 + 10,
   },
   title: {
     fontSize: 16,

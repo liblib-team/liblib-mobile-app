@@ -1,87 +1,93 @@
 import * as React from 'react'
-import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
-
+import { StyleSheet, SafeAreaView, View, FlatList, Alert } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import Colors from '../../../constants/Colors'
 import BookSaved from '../../molecules/books/BookSaved'
-export default ListBookSaved = (props) => {
-  const books = [
-    {
-      id: '1',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/phan-tich-chung-khoan-outline-26.jpg?v=1521167573353',
-      title: 'Memory',
-      author: 'Alexander',
-      description:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry , when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    },
-    {
-      id: '2',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/thuat-doc-tam.png?v=1568685712587',
-      title: 'About yourself',
-      author: 'Alexander',
-      description:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry , when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    },
-    {
-      id: '3',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/buoi-sang-dieu-ky-danh-cho-nha-ban-hang-01.jpg?v=1561185496810',
-      title: 'Its',
-      author: 'Alexander',
-      description: '',
-      description:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry , when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    },
-    {
-      id: '4',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/sach-titan-gia-toc-rockefeller.jpg?v=1586842846807',
-      title: 'Sat',
-      author: 'Alexander',
-      description:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry , when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    },
-    {
-      id: '5',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/sach-titan-gia-toc-rockefeller.jpg?v=1586842846807',
-      title: 'Sat',
-      author: 'Alexander',
-      description:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry , when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    },
-    {
-      id: '6',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/tao-lap-mo-hinh-kinh-doanh.jpg?v=1527215308757',
-      title: 'Sat',
-      author: 'Alexander',
-      description:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry , when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    },
-  ]
+import store from '../../../store'
 
-  return (
-    <View>
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          vertical
-          data={books}
-          renderItem={({ item }) => (
-            <BookSaved
-              id={item.id}
-              img={item.uri}
-              title={item.title}
-              author={item.author}
-              description={item.description}
+class ListBookSaved extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      books: [],
+    }
+  }
+
+  updateListBook = async () => {
+    try {
+      const username = store.getState().auth.username
+      const bookList = await AsyncStorage.getItem('favoriteBooks' + username)
+      if (bookList !== null) {
+        this.setState({
+          books: JSON.parse(bookList),
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  componentDidMount = () => this.updateListBook();
+
+  componentDidUpdate = () => this.updateListBook();
+
+   removeBook = (bookId) => {
+    Alert.alert(
+     "Bạn có chắc chắn muốn xóa sách này?",
+      "Sau khi xóa sách không còn trong danh sách yêu thích của bạn!",
+      [
+        {
+          text: "Hủy",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: async() => {
+          try {
+            const username = store.getState().auth.username
+            let booksJSON= await AsyncStorage.getItem('favoriteBooks' + username)
+            let booksArray = JSON.parse(booksJSON);
+            for( var i = 0; i < booksArray.length; i++){
+              if ( booksArray[i].id == bookId){
+                booksArray.splice(i, 1)
+               }
+             }
+            await AsyncStorage.setItem('favoriteBooks' + username, JSON.stringify(booksArray))
+            this.setState({
+               books:booksArray
+            })
+        }
+        catch(error){
+            console.log(error)
+        }
+        } }
+      ],
+      { cancelable: false }
+    );
+
+  }
+
+  render() {
+    return (
+      <View>
+        <SafeAreaView style={styles.container}>
+          {this.state.books.length > 0 && (
+            <FlatList
+              data={this.state.books}
+              renderItem={({ item }) => (
+                <BookSaved
+                  id={item.id}
+                  img={item.image}
+                  title={item.title}
+                  description={item.description}
+                  removeBook={this.removeBook}
+                />
+              )}
+              keyExtractor={(item) => item.id}
             />
           )}
-          keyExtractor={(item) => item.id}
-        />
-      </SafeAreaView>
-    </View>
-  )
+        </SafeAreaView>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -89,3 +95,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
 })
+
+export default ListBookSaved

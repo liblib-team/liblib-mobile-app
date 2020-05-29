@@ -1,15 +1,18 @@
 import * as React from 'react'
+import { AsyncStorage } from 'react-native'
 import { StyleSheet, Text, View } from 'react-native'
 
 import Colors from '../constants/Colors'
 import ListBookSaved from '../components/oganism/favorite/ListBookSaved'
 
-export default function Favorite() {
-  return (
-    <View>
-      <ListBookSaved />
-    </View>
-  )
+class Favorite extends React.Component {
+  render() {
+    return (
+      <View>
+        <ListBookSaved />
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -24,3 +27,5 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 })
+
+export default Favorite

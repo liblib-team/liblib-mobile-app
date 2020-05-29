@@ -3,70 +3,46 @@ import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
 
 import BookbyAuthor from '../../molecules/bookDetails/BookbyAuthor'
 import Colors from '../../../constants/Colors'
-export default ListBookbyAuthor = (props) => {
-  const books = [
-    {
-      id: '1',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/phan-tich-chung-khoan-outline-26.jpg?v=1521167573353',
-      title: 'Memory. This is a long title',
-      author: 'Alexander',
-    },
-    {
-      id: '2',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/thuat-doc-tam.png?v=1568685712587',
-      title: 'About yourself',
-      author: 'Alexander',
-    },
-    {
-      id: '3',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/buoi-sang-dieu-ky-danh-cho-nha-ban-hang-01.jpg?v=1561185496810',
-      title: 'Its',
-      author: 'Alexander',
-    },
-    {
-      id: '4',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/sach-titan-gia-toc-rockefeller.jpg?v=1586842846807',
-      title: 'Sat',
-      author: 'Alexander',
-    },
-    {
-      id: '5',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/sach-titan-gia-toc-rockefeller.jpg?v=1586842846807',
-      title: 'Sat',
-      author: 'Alexander',
-    },
-    {
-      id: '6',
-      uri:
-        'https://bizweb.dktcdn.net/100/197/269/products/tao-lap-mo-hinh-kinh-doanh.jpg?v=1527215308757',
-      title: 'Sat',
-      author: 'Alexander',
-    },
-  ]
-  return (
-    <View>
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          horizontal
-          data={books}
-          renderItem={({ item }) => (
-            <BookbyAuthor
-              id={item.id}
-              img={item.uri}
-              title={item.title}
-              author={item.author}
-            />
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </SafeAreaView>
-    </View>
-  )
+import { queryBooksSameAuthors } from '../../../redux-saga/actions/book.actions'
+import { connect } from 'react-redux'
+
+class ListBookbyAuthor extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  componentDidMount() {
+    const { id } = this.props
+    this.props.queryBooksSameAuthors(id)
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.props.queryBooksSameAuthors(this.props.id)
+    }
+  }
+  render() {
+    const books = this.props.booksSameAuthors
+    return (
+      <View>
+        <SafeAreaView style={styles.container}>
+          <FlatList
+            horizontal
+            data={books}
+            renderItem={({ item }) => (
+              <BookbyAuthor
+                id={item.id}
+                img={item.image}
+                author={item.author}
+                title={item.title}
+                authors={item.authors.map((author) => author.name).join(', ')}
+                description={item.description}
+              />
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </SafeAreaView>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -74,3 +50,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
 })
+
+const mapStateToProps = (state) => ({
+  booksSameAuthors: state.booksSameAuthors,
+})
+
+const mapDispatchToProps = {
+  queryBooksSameAuthors,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ListBookbyAuthor)

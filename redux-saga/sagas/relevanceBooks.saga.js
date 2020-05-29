@@ -1,10 +1,10 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
-import { GET_LIST_SUBJECTS } from '../actions/action-type'
+import { call, put, takeEvery } from 'redux-saga/effects'
+import { GET_RELEVANCE_BOOKS } from '../actions/action-type'
 import { SERVER_URL, getHeaders } from '../../auth'
 
-const queryListSubjects = () => {
+const queryRelevanceBooks = (id) => {
   return new Promise((resolve, reject) => {
-    return fetch(SERVER_URL + 'subject/list', {
+    return fetch(SERVER_URL + 'book/list/relevance/' + id, {
       headers: getHeaders(false),
       method: 'GET',
     })
@@ -15,15 +15,15 @@ const queryListSubjects = () => {
   })
 }
 
-function* doQueryListSubjects(request) {
+function* doQueryRelevanceBooks(request) {
   try {
-    const data = yield call(queryListSubjects)
+    const data = yield call(queryRelevanceBooks, request.id)
     yield put({ type: request.response.success, data: data })
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
-export function* watchQueryListSubjects() {
-  yield takeLatest(GET_LIST_SUBJECTS, doQueryListSubjects)
+export function* watchQueryRelevanceBooks() {
+  yield takeEvery(GET_RELEVANCE_BOOKS, doQueryRelevanceBooks)
 }

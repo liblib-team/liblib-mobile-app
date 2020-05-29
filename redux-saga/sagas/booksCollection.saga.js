@@ -1,19 +1,15 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {
-  GET_TOP_VIEW_BOOK,
+  GET_POPULAR_BOOK,
   GET_HOT_BOOKS,
   GET_BOOKS_BY_SUBJECT,
 } from '../actions/action-type'
-import { SERVER_URL } from '../../auth'
+import { SERVER_URL, getHeaders } from '../../auth'
 
 const queryPopularBook = () => {
   return new Promise((resolve, reject) => {
     return fetch(SERVER_URL + 'book/list/popular', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: getHeaders(false),
       method: 'GET',
     })
       .then((response) => (response.status === 200 ? response : reject(response)))
@@ -35,11 +31,7 @@ function* doQueryPopularBook(request) {
 const queryHotBooks = () => {
   return new Promise((resolve, reject) => {
     return fetch(SERVER_URL + 'book/list/rating', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: getHeaders(false),
       method: 'GET',
     })
       .then((response) => (response.status === 200 ? response : reject(response)))
@@ -61,11 +53,7 @@ function* doQueryHotBooks(request) {
 const queryBooksBySubject = (id) => {
   return new Promise((resolve, reject) => {
     return fetch(SERVER_URL + 'book/list/subject/' + id, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: getHeaders(false),
       method: 'GET',
     })
       .then((response) => (response.status === 200 ? response : reject(response)))
@@ -85,7 +73,7 @@ function* doQueryBooksBySubject(request) {
 }
 
 export function* watchQueryPopularBook() {
-  yield takeLatest(GET_TOP_VIEW_BOOK, doQueryPopularBook)
+  yield takeLatest(GET_POPULAR_BOOK, doQueryPopularBook)
 }
 export function* watchQueryHotBooks() {
   yield takeLatest(GET_HOT_BOOKS, doQueryHotBooks)
