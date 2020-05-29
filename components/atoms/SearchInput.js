@@ -3,6 +3,7 @@ import { Item, Icon, Input } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
+
 import Colors from '../../constants/Colors'
 
 const SearchInput = (props) => {
@@ -13,7 +14,6 @@ const SearchInput = (props) => {
   const {autoFocus, isBookSearch} = props
   return (
     <Item rounded style={styles.searchInput}>
-      <Icon name="search" />
       <Input
         placeholder="Nhập để tìm kiếm sách"
         autoFocus={autoFocus}
@@ -27,6 +27,7 @@ const SearchInput = (props) => {
         }}
         value={text}
         autoCapitalize={'none'}
+        onSubmitEditing={() => {console.log(text)}}
       />
       <TouchableOpacity
         onPress={() => {

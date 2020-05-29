@@ -5,7 +5,7 @@ import SearchHeader from '../components/molecules/searchHeader/SearchHeader'
 const SearchBook = () => {
   return (
      <View>
-       <SearchHeader autoFocus={true}>    
+       <SearchHeader autoFocus={true} isVisibaleBackButton={true}>    
        </SearchHeader>
       <Text>
           Không tìm thấy sách nào liên quan! Nhập lại với từ khóa khác!
