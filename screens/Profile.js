@@ -4,6 +4,7 @@ import { Button } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
 import { logoutAction } from '../redux-saga/actions/auth.actions'
+import MainLayout from '../components/oganism/main-layout/MainLayout'
 
 const Profile = (props) => {
   const navigator = useNavigation()
@@ -17,7 +18,7 @@ const Profile = (props) => {
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <MainLayout>
       <Text>Cài đặt, thông tin cá nhân</Text>
       <Button onPress={onLogin}>
         <Text>Đăng nhập tài khoản</Text>
@@ -25,7 +26,8 @@ const Profile = (props) => {
       <Button onPress={onLogout}>
         <Text>Đăng xuất</Text>
       </Button>
-    </ScrollView>
+    </MainLayout>
+      
   )
 }
 

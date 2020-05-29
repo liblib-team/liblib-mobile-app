@@ -22,7 +22,7 @@ class Review extends React.Component {
     if (this.props.id !== prevProps.id) {
       this.props.queryGetRatingBook(this.props.id)
     }
-    if( this.props.listRatingBook != prevProps.listRatingBook) {
+    if( this.props.listRatingBook !== prevProps.listRatingBook) {
       this.props.queryGetRatingBook(this.props.id)
     }
   }

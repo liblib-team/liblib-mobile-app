@@ -1,16 +1,17 @@
 import * as React from 'react'
-import { AsyncStorage } from 'react-native'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet} from 'react-native'
 
 import Colors from '../constants/Colors'
 import ListBookSaved from '../components/oganism/favorite/ListBookSaved'
+import MainLayout from '../components/oganism/main-layout/MainLayout'
 
 class Favorite extends React.Component {
   render() {
     return (
-      <View>
+      <MainLayout>       
         <ListBookSaved />
-      </View>
+      </MainLayout>
+     
     )
   }
 }

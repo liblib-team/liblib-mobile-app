@@ -22,8 +22,8 @@ class ListBookbyAuthor extends React.Component {
   render() {
     const books = this.props.booksSameAuthors
     return (
-      <View>
-        <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <SafeAreaView>
           <FlatList
             horizontal
             data={books}
@@ -48,6 +48,7 @@ class ListBookbyAuthor extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+    marginRight: 10
   },
 })
 

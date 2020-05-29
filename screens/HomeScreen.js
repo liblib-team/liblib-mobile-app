@@ -7,14 +7,16 @@ import ViewMore from '../components/molecules/books/ViewMore'
 import Colors from '../constants/Colors'
 import ListRepresentativeBook from '../components/oganism/listBook/ListRepresentativeBook'
 import Collections from '../components/molecules/collections/Collections'
+import MainLayout from '../components/oganism/main-layout/MainLayout'
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, props }) => {
   const onGoToViewAll = (filterName, id) => {
     navigation.navigate('ViewAllBooks', { title: filterName, id: id })
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <MainLayout>
+      <ScrollView style={styles.container}>
       <ListRepresentativeBook />
       <ViewMore filterName="Sách xem nhiều" onGoToViewAll={onGoToViewAll} />
       <ListBook filterName="Sách xem nhiều" />
@@ -22,7 +24,9 @@ const HomeScreen = ({ navigation }) => {
       <Collections onGoToViewAll={onGoToViewAll} />
       <ViewMore filterName="Sách Hot" onGoToViewAll={onGoToViewAll} />
       <ListBook filterName="Sách Hot" />
-    </ScrollView>
+      </ScrollView>
+    </MainLayout>
+    
   )
 }
 
