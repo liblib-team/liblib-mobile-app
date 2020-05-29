@@ -1,17 +1,23 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { Card, Icon, Button } from 'native-base'
+import { useNavigation } from "@react-navigation/native"
 
 import CustomImage from '../../atoms/CustomImage'
 import Colors from '../../../constants/Colors'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 export default BookReserved = (props) => {
+  const navigator = useNavigation()
   const { id, img, name, borowTime, returnTime, status, reservationId, removeOrderBook } = props
+  const onGoToBookDetails = (title, id) => {
+    navigator.navigate("BookDetails", { title: title, id: id })
+  }
   return (
     <View>
       <Card style={styles.container}>
-        <View style={styles.content}>
+        <TouchableOpacity onPress={() => onGoToBookDetails(name, id)}>
+          <View style={styles.content}>
           <View>
             <CustomImage img={img} />
           </View>
@@ -26,6 +32,8 @@ export default BookReserved = (props) => {
             <Text style={styles.detail}>Trạng thái: {status}</Text>
           </View>
         </View>
+        </TouchableOpacity>
+        
         <TouchableWithoutFeedback onPress={() => removeOrderBook(reservationId)}>
           <Icon name="close" type="AntDesign" style={styles.iconMore}></Icon>
         </TouchableWithoutFeedback>
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
     color: Colors.secondary_dark,
   },
   iconMore: {
-    fontSize: 20
+    fontSize: 22
   },
  
 })

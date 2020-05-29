@@ -7,18 +7,18 @@ import {
   Text,
   FlatList,
   Alert,
-} from "react-native";
-import { connect } from "react-redux";
-import { SERVER_URL, getHeaders } from "../../../auth";
+} from "react-native"
+import { connect } from "react-redux"
+import { SERVER_URL, getHeaders } from "../../../auth"
 
-import { queryListReverations } from "../../../redux-saga/actions/listReservations.actions";
-import Colors from "../../../constants/Colors";
-import BookReserved from "../../molecules/books/BookReserved";
-import { Toast } from "native-base";
+import { queryListReverations } from "../../../redux-saga/actions/listReservations.actions"
+import Colors from "../../../constants/Colors"
+import BookReserved from "../../molecules/books/BookReserved"
+import { Toast } from "native-base"
 
 class ListBookRevered extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
   componentDidMount() {
     this.props.queryListReverations()

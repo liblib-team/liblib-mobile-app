@@ -58,12 +58,12 @@ class BookInfo extends React.Component {
         Toast.show({
           type: "success",
           text: "Yêu cầu đặt sách thành công",
-        });
+        })
       } else if (json.success == false) {
         Toast.show({
           type: "danger",
           text: json.message,
-        });
+        })
       }
     })
     .catch((error) => {

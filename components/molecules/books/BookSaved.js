@@ -1,18 +1,18 @@
-import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
-import { Card, Button, Icon } from "native-base";
-import { useNavigation } from "@react-navigation/native";
+import * as React from "react"
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native"
+import { Card, Button, Icon } from "native-base"
+import { useNavigation } from "@react-navigation/native"
 
-import CustomImage from "../../atoms/CustomImage";
-import Colors from "../../../constants/Colors";
-import Layout from "../../../constants/Layout";
+import CustomImage from "../../atoms/CustomImage"
+import Colors from "../../../constants/Colors"
+import Layout from "../../../constants/Layout"
 
 export default BookSaved = (props) => {
-  const navigator = useNavigation();
+  const navigator = useNavigation()
   const { id, img, title, authors, description, removeBook } = props;
   const onGoToBookDetails = (title, id) => {
-    navigator.navigate("BookDetails", { title: title, id: id });
-  };
+    navigator.navigate("BookDetails", { title: title, id: id })
+  }
 
   return (
     <TouchableOpacity
@@ -54,8 +54,8 @@ export default BookSaved = (props) => {
         </Card>
       </View>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingBottom: 5,
   },
-});
+})
