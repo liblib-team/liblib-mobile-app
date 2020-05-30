@@ -2,13 +2,13 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import { SEARCH_BOOKS } from '../actions/action-type'
 import { SERVER_URL, getHeaders } from '../../auth'
 
-const querySearchBooks = () => {
+const querySearchBooks = (key) => {
     return new Promise((resolve, reject) => {
         return fetch(SERVER_URL + 'book/search', {
           headers: getHeaders(false),
           method: 'POST',
           body:  JSON.stringify(
-              "Chí phèo"
+            key
           ),
         })
           .then((response) => (response.status === 200 ? response : reject(response)))
@@ -20,9 +20,8 @@ const querySearchBooks = () => {
 
 function* doQuerySearchBooks(request) {
     try {
-      const data = yield call(querySearchBooks)
+      const data = yield call(querySearchBooks, request.key)
       yield put({ type: request.response.success, data: data })
-      console.log(data)
     } catch (error) {
       console.log(error)
     }

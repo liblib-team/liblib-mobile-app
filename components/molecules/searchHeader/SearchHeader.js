@@ -8,7 +8,7 @@ import VoiceButton from '../../atoms/VoiceButton'
 import Colors from '../../../constants/Colors'
 
 const SearchHeader = (props) => {
-    const { isVisibaleBackButton } = props
+    const { isVisibaleBackButton, onSearchBooks } = props
     const navigator = useNavigation()
   return (
     <Header androidStatusBarColor={Colors.tintColor} rounded style={styles.header}>
@@ -17,6 +17,7 @@ const SearchHeader = (props) => {
         <SearchInput
         onGoToSearchView={props.onGoToSearchView}
         autoFocus={props.autoFocus}
+        onSearchBooks={onSearchBooks}
         />
         <VoiceButton />
     </Header>

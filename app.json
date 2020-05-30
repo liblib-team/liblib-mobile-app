@@ -22,8 +22,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "package": "com.oaad.liblib",
+      "versionCode": 1
     }
   }
 }

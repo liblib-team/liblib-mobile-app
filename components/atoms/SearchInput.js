@@ -11,7 +11,7 @@ const SearchInput = (props) => {
 
   const navigator = useNavigation()
 
-  const {autoFocus, isBookSearch} = props
+  const {autoFocus, isBookSearch, onSearchBooks} = props
   return (
     <Item rounded style={styles.searchInput}>
       <Input
@@ -27,7 +27,7 @@ const SearchInput = (props) => {
         }}
         value={text}
         autoCapitalize={'none'}
-        onSubmitEditing={() => {console.log(text)}}
+        onSubmitEditing={() => onSearchBooks(text)}
       />
       <TouchableOpacity
         onPress={() => {

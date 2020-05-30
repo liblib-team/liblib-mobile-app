@@ -22,7 +22,7 @@ class Review extends React.Component {
     if (this.props.id !== prevProps.id) {
       this.props.queryGetRatingBook(this.props.id)
     }
-    if( this.props.listRatingBook !== prevProps.listRatingBook) {
+    if( this.props.reviewBook !== prevProps.reviewBook) {
       this.props.queryGetRatingBook(this.props.id)
     }
   }
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   listRatingBook: state.listRatingBook,
+  reviewBook: state.reviewBook
 })
 
 const mapDispatchToProps = {
