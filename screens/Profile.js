@@ -1,13 +1,11 @@
 import * as React from 'react'
-import { StyleSheet, Text, ScrollView, View, Image } from 'react-native'
+import { StyleSheet, Text, ScrollView, View, Image, TouchableOpacity } from 'react-native'
 import { Button, Icon, ListItem, List } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
 import { logoutAction } from '../redux-saga/actions/auth.actions'
 
 import Colors from '../constants/Colors'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-
 
 const Profile = (props) => {
   const navigator = useNavigation()
