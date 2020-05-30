@@ -13,7 +13,6 @@ class SearchBook extends React.Component {
   onSearchBooks = async (key) => {
      this.props.querySearchBooks(key)
   }
-  component
   render() {
     let books = this.props.listBooksBySearch
     return (
