@@ -40,11 +40,11 @@ const removeCurrentUser = async () => {
 
 const SERVER_URL = 'http://blueto0th.ddns.net:5000/api/'
 
-const getHeaders = (withAuth) => {
+const getHeaders = (withAuth, multipart = false) => {
   const authToken = store.getState().auth.jwt
   const headersWithoutAuth = {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
+    'Content-Type': multipart ? 'multipart/form-data' : 'application/json',
     'Access-Control-Allow-Origin': '*',
   }
   if (withAuth && authToken !== null) {
@@ -53,8 +53,7 @@ const getHeaders = (withAuth) => {
       Authorization: `Bearer ${authToken}`,
     }
   }
-  return headersWithoutAuth
-}
+  return headersWithoutAuth}
 export {
   isAuth,
   setCurrentUser,
