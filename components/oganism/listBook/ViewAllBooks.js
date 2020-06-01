@@ -54,8 +54,8 @@ class ViewAllBooks extends Component {
       books = this.props.booksBySubject
     }
     return (
-      <View>
-        <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <SafeAreaView style={{marginTop: 10}} >
           {books.length > 0 && (
             <FlatList
               numColumns={2}

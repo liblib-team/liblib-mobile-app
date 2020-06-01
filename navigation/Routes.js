@@ -11,6 +11,7 @@ import SignUp from '../screens/SignUp'
 import ChangePassword from '../screens/ChangePassword'
 import Collections from '../components/molecules/collections/Collections'
 import PDFView from '../screens/PDFView'
+import SearchBook from '../screens/SearchBook'
 
 const Stack = createStackNavigator()
 
@@ -20,7 +21,7 @@ const optionsHeader = ({ route }) => ({
 export default Routes = () => {
   return (
     <Stack.Navigator initialRouteName="Trang chủ">
-      <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
+      <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{headerShown: false}}/>
       <Stack.Screen
         name="ViewAllBooks"
         component={ViewAllBooks}
@@ -33,6 +34,7 @@ export default Routes = () => {
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="Collections" component={Collections} />
       <Stack.Screen name="PDFView" component={PDFView} options={optionsHeader} />
+      <Stack.Screen name='SearchBook' component={SearchBook} options={{headerShown: false,  animationEnabled: false,}} />
     </Stack.Navigator>
   )
 }

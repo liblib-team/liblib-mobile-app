@@ -4,6 +4,7 @@ import { AsyncStorage } from 'react-native'
 import Colors from '../../../constants/Colors'
 import BookSaved from '../../molecules/books/BookSaved'
 import store from '../../../store'
+import { Text } from 'native-base'
 
 class ListBookSaved extends React.Component {
   constructor(props) {
@@ -26,9 +27,9 @@ class ListBookSaved extends React.Component {
       console.log(error)
     }
   }
-  componentDidMount = () => this.updateListBook();
+  componentDidMount = () => this.updateListBook()
 
-  componentDidUpdate = () => this.updateListBook();
+  componentDidUpdate = () => this.updateListBook()
 
    removeBook = (bookId) => {
     Alert.alert(
@@ -69,7 +70,7 @@ class ListBookSaved extends React.Component {
     return (
       <View>
         <SafeAreaView style={styles.container}>
-          {this.state.books.length > 0 && (
+          {this.state.books.length > 0 ? (
             <FlatList
               data={this.state.books}
               renderItem={({ item }) => (
@@ -83,6 +84,10 @@ class ListBookSaved extends React.Component {
               )}
               keyExtractor={(item) => item.id}
             />
+          ) : (
+            <View style={styles.container}>
+              <Text>Bạn chưa lưu sách nào!</Text>
+            </View>
           )}
         </SafeAreaView>
       </View>
@@ -93,6 +98,7 @@ class ListBookSaved extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+    marginTop: 10
   },
 })
 

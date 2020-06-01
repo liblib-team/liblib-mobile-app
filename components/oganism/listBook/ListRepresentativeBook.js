@@ -8,19 +8,19 @@ import Layout from '../../../constants/Layout'
 const ListBook = [
   {
     title: 'VNU',
-    subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
+    subtitle: 'Thư viện đại học quốc gia Hà Nội',
     illustration:
       'https://media.ex-cdn.com/EXP/media.nongnghiep.vn/files/f1/2018/12/12/15-01-46_thu_vien_cu_dh_kinh_te_quoc_dn.jpg',
   },
   {
     title: 'VNU',
-    subtitle: 'Lorem ipsum dolor sit amet',
+    subtitle: 'Phòng học tòa nhà C1T',
     illustration:
       'https://mekongsoft.com.vn/assets/images/tintuc/87a910928566086690fa9e71a7871e2d.jpg',
   },
   {
-    title: 'White Pocket Sunset',
-    subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
+    title: 'Trường đại học Công nghệ',
+    subtitle: 'Trường đại học Công nghệ',
     illustration: 'https://student.uet.vnu.edu.vn/images/logo.png',
   },
   {
@@ -61,6 +61,7 @@ export default ListRepresentativeBook = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 10
   },
   item: {
     width: screenWidth - 60,

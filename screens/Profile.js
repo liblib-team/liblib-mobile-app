@@ -17,6 +17,7 @@ import Constants from "expo-constants"
 
 import { SERVER_URL, getHeaders } from "../auth/index" 
 import Colors from "../constants/Colors" 
+import MainLayout from '../components/oganism/main-layout/MainLayout'
 
 const Profile = (props) => {
   const navigator = useNavigation() 
@@ -45,9 +46,8 @@ const Profile = (props) => {
       }) 
   } 
   useEffect(() => {
-    fetchUserInfo()
-    getPermissionAsync()
-  }) 
+      fetchUserInfo()
+    })
   getPermissionAsync = async () => {
     if (Constants.platform.android) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL) 
@@ -58,6 +58,7 @@ const Profile = (props) => {
   }
 
   pickImage = async () => {
+    getPermissionAsync()
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -106,7 +107,8 @@ const Profile = (props) => {
   } 
 
   return (
-    <ScrollView
+    <MainLayout>
+      <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
@@ -197,6 +199,8 @@ const Profile = (props) => {
         </ListItem>
       </List>
     </ScrollView>
+    </MainLayout>
+    
   )
 }
 

@@ -6,6 +6,8 @@ import HomeScreen from '../screens/HomeScreen'
 import Favorite from '../screens/Favorite'
 import Profile from '../screens/Profile'
 import MyLibrary from '../screens/MyLibrary'
+import store from '../store'
+import SignIn from '../screens/SignIn'
 
 const BottomTab = createBottomTabNavigator()
 const INITIAL_ROUTE_NAME = 'Home'
@@ -40,7 +42,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Cá nhân"
-        component={Profile}
+        component={store.getState().auth.username ? Profile : SignIn}
         options={{
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />,
         }}

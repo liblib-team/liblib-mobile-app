@@ -30,6 +30,7 @@ class ReviewDialog extends React.Component {
     reviewBook.comment = this.state.comment
     this.props.queryPostRatingBook(reviewBook)
     this.props.setVisibleDialog(false)
+    this.setState({rating: 0, comment: ''})
   }
 
   render() {
@@ -56,7 +57,7 @@ class ReviewDialog extends React.Component {
           />
           <Dialog.Button
             label="Hủy"
-            onPress={() => this.props.setVisibleDialog(false)}
+            onPress={() => {this.props.setVisibleDialog(false); this.setState({rating: 0, comment: ''})}}
             color={Colors.warningText}
           />
           <Dialog.Button
