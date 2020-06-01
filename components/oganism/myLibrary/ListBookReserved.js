@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   iconSearch: {
     fontSize: 25,
-    alignSelf: "center",
+    alignSelf: "center", 
     marginRight: 5,
   },
   filter: {

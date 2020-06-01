@@ -10,7 +10,6 @@ import { relevanceBooksReducer } from './relevanceBooks.reducer'
 import { booksSameAuthorsReducer } from './booksSameAuthors.reducer'
 import { listReverationsReducer } from './listReverations.reducer'
 import { listBorrowedReducer } from './listBorrowed.reducer'
-import { listBookBySearchReducer } from './search-books.reducer'
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -25,7 +24,6 @@ const reducer = combineReducers({
   booksSameAuthors: booksSameAuthorsReducer,
   listReverations: listReverationsReducer,
   listBorrowed: listBorrowedReducer,
-  listBooksBySearch: listBookBySearchReducer,
 })
 
 export default reducer

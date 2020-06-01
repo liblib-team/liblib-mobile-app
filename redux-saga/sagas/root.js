@@ -13,7 +13,6 @@ import { watchQueryRelevanceBooks } from './relevanceBooks.saga'
 import { watchQueryBooksSameAuthors } from './booksSameAuthors.saga'
 import { watchQueryListReverations } from './listReverations.saga'
 import { watchQueryListBorrowed } from './listBorrowed.saga'
-import { watchQuerySearchBooks } from './search-books.saga'
 
 export default function* rootSaga() {
   yield all([
@@ -29,6 +28,5 @@ export default function* rootSaga() {
     watchQueryBooksSameAuthors(),
     watchQueryListReverations(),
     watchQueryListBorrowed(),
-    watchQuerySearchBooks(),
   ])
 }

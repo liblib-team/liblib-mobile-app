@@ -20,16 +20,7 @@ class ListBookBorrowed extends React.Component {
   render() {
     const books = this.props.listBookBorrowed
     return (
-      <ScrollView>
-        <Card style={styles.date}>
-          <Text style={styles.text}>Từ ngày:</Text>
-          <DatePicker textStyle={{ color: Colors.tintColor }}></DatePicker>
-          <Text style={styles.text}>Đến ngày:</Text>
-          <DatePicker textStyle={{ color: Colors.tintColor }}></DatePicker>
-
-          <Icon name="search" style={styles.iconSearch} />
-        </Card>
-
+      <ScrollView style={{marginTop: 10}}>
         <SafeAreaView style={styles.container}>
           <FlatList
             vertical

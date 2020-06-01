@@ -1,24 +1,45 @@
 import React from 'react'
 import { View, StyleSheet, FlatList, SafeAreaView, Text } from 'react-native'
 import SearchHeader from '../components/molecules/searchHeader/SearchHeader'
-import { connect } from 'react-redux'
 
-import { querySearchBooks } from '../redux-saga/actions/search-books.actions'
 import Colors from '../constants/Colors'
+import { SERVER_URL, getHeaders } from '../auth'
 
 class SearchBook extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      books: [],
+      isSearchBook: false
+    }
   }
   onSearchBooks = async (key) => {
-     this.props.querySearchBooks(key)
+    fetch(SERVER_URL + 'book/search', {
+      headers: getHeaders(false),
+      method: 'POST',
+      body:  JSON.stringify(
+        key
+      ),
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      this.setState({books: response})
+      this.setState({isSearchBook: true})
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
   render() {
-    let books = this.props.listBooksBySearch
+    let books = this.state.books
     return (
     <View style={{backgroundColor: Colors.white, flex: 1}}>
       <SearchHeader autoFocus={true} isVisibaleBackButton={true} onSearchBooks={this.onSearchBooks}></SearchHeader>
-      <SafeAreaView style={styles.container}>
+      {
+        !this.state.isSearchBook ? (
+          <View></View>
+        ) : (
+           <SafeAreaView style={styles.container}>
           {books.length > 0 ? (
             <FlatList
               numColumns={2}
@@ -41,7 +62,9 @@ class SearchBook extends React.Component {
             </View>
           )}
         </SafeAreaView>
-    </View>
+        )
+      }
+        </View>
   )
   } 
 }
@@ -65,12 +88,4 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (state) => ({
-  listBooksBySearch: state.listBooksBySearch,
-})
-
-const mapDispatchToProps = {
-  querySearchBooks,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBook)
+export default SearchBook
